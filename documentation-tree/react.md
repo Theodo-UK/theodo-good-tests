@@ -1,4 +1,5 @@
 - [Component](./react/component.md)
 - [Reducer](./react/reducer.md)
 - [Saga](./react/saga.md)
+- [Selector](./react/selector.md)
 - [Service](./react/service.md)
