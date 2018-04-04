@@ -1,10 +1,13 @@
+# Component
+
 - [Passes props to children](#passes-props-to-children)
 - [Render](#render)
 - [User interaction](./component/user-interaction.md)
 
-# <a id="passes-props-to-children"></a>Passes props to children
+## <a id="passes-props-to-children"></a>Passes props to children
 
-Code
+### Code
+
 ```js
 if (this.props.customOnChange) {
   const inputOnChange = this.props.input.onChange;
@@ -28,7 +31,7 @@ return (
 )
 ```
 
-Test
+### Test
 
 ```js
 it('calls customOnChange on onChange when it is present', () => {
@@ -52,4 +55,4 @@ it('calls customOnChange on onChange when it is present', () => {
 });
 ```
 
-# <a id="render"></a>Render
+## <a id="render"></a>Render

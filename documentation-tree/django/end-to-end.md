@@ -1,7 +1,11 @@
-Code
+# End to end
+
+## Example
+
+### Code
 
 ```python
-# <my_project>/<my_project>/urls.py
+# <my_project>/<app_name>/urls.py
 from django.conf.urls import url
 from django.contrib import admin
 from <app_name>.views import HelloWorldView
@@ -27,7 +31,7 @@ class HelloWorldView(APIView):
         return Response(data, status.HTTP_200_OK)
 ```
 
-Test
+### Test
 
 ```python
 # <my_project>/<app_name>/tests/views/test_<my_view>.py

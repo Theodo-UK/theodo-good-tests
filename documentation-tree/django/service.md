@@ -1,4 +1,8 @@
-Code
+# Service
+
+## Example
+
+### Code
 
 ```python
 # <my_project>/<app_name>/services/test_double.py
@@ -7,7 +11,7 @@ def get_double(number):
   return 2 * number
 ```
 
-Test
+### Test
 
 ```python
 # <my_project>/<app_name>/tests/services/test_double.py
