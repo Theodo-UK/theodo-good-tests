@@ -9,26 +9,30 @@
 ### Code
 
 ```js
-if (this.props.customOnChange) {
-  const inputOnChange = this.props.input.onChange;
-  this.props.input.onChange = value => {
-    inputOnChange(value);
-    this.props.customOnChange(value);
-  };
-}
+class InputField {
+  render() {
+    if (this.props.customOnChange) {
+      const inputOnChange = this.props.input.onChange;
+      this.props.input.onChange = value => {
+        inputOnChange(value);
+        this.props.customOnChange(value);
+      };
+    }
 
-return (
-  <div className={this.props.className}>
-    <Input
-      cluae={value}
-      {...this.props.input}
-      disabled={this.props.disabled}
-      label={this.props.label}
-      style={this.props.style}
-      type={this.props.type}
-    />
-  </div>
-)
+    return (
+      <div className={this.props.className}>
+        <Input
+          cluae={value}
+          {...this.props.input}
+          disabled={this.props.disabled}
+          label={this.props.label}
+          style={this.props.style}
+          type={this.props.type}
+        />
+      </div>
+    )
+  }
+}
 ```
 
 ### Test
