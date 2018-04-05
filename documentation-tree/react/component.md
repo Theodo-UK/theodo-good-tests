@@ -9,26 +9,29 @@
 ### Code
 
 ```js
-if (this.props.customOnChange) {
-  const inputOnChange = this.props.input.onChange;
-  this.props.input.onChange = value => {
-    inputOnChange(value);
-    this.props.customOnChange(value);
-  };
+class InputField {
+  onChange = value => {
+    if (this.props.customOnChange)
+      this.props.customOnChange(value);
+    this.props.input.onChange(value);
+  }
+  
+  render() {
+    return (
+      <div className={this.props.className}>
+        <Input
+          cluae={value}
+          {...this.props.input}
+          onChange={this.onChange}
+          disabled={this.props.disabled}
+          label={this.props.label}
+          style={this.props.style}
+          type={this.props.type}
+        />
+      </div>
+    )
+  }
 }
-
-return (
-  <div className={this.props.className}>
-    <Input
-      cluae={value}
-      {...this.props.input}
-      disabled={this.props.disabled}
-      label={this.props.label}
-      style={this.props.style}
-      type={this.props.type}
-    />
-  </div>
-)
 ```
 
 ### Test
@@ -49,7 +52,7 @@ it('calls customOnChange on onChange when it is present', () => {
       type="text"
     />,
   );
-  component.props().input.onChange(value);
+  component.instance().onChange(value);
   expect(onChange).toHaveBeenCalledWith(value);
   expect(customOnChange).toHaveBeenCalledWith(value);
 });
