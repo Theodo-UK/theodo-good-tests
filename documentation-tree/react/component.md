@@ -2,7 +2,7 @@
 
 - [Passes props to children](#passes-props-to-children)
 - [Render](#render)
-- [User interaction](./component/user-interaction.md)
+- [User interaction](#user-interaction)
 
 ## <a id="passes-props-to-children"></a>Passes props to children
 
@@ -55,3 +55,24 @@ it('calls customOnChange on onChange when it is present', () => {
 ```
 
 ## <a id="render"></a>Render
+
+## <a id="user-interaction"></a>User interaction
+### Code
+```js
+class Button {
+  render() {
+    return <button onClick={this.props.onClick} />;
+  }
+}
+```
+
+### Test
+```js
+it('calls the onClick prop when clicking', () => {
+  const onClick = jest.fn();
+  const component = shallow(<Button onClick={onClick} />);
+  
+  component.find('button').simulate('click');
+  expect(onClick).toHaveBeenCalledTimes(1);
+});
+```
