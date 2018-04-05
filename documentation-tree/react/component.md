@@ -20,12 +20,10 @@ class InputField {
     return (
       <div className={this.props.className}>
         <Input
-          value={value}
           {...this.props.input}
           onChange={this.onChange}
           disabled={this.props.disabled}
           label={this.props.label}
-          style={this.props.style}
           type={this.props.type}
         />
       </div>
