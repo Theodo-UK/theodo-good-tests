@@ -6,7 +6,7 @@
 - [User interaction](#user-interaction)
 
 ## <a id="general-advice"></a>General advice
-*Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).  
+*Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).
 There is *zero* valid use case for `react-test-renderer` directly: Enzyme is higher level.
 
 ## <a id="passes-props-to-children"></a>Passes props to children
@@ -51,7 +51,7 @@ it('calls customOnChange on onChange when it is present', () => {
     label: 'mocked_label',
   };
 
-  const component = mount(<InputField {...props} />);
+  const component = shallow(<InputField {...props} />);
   component.instance().onChange('mocked_value_2');
 
   expect(props.input.onChange).toHaveBeenCalledWith('mocked_value_2');
@@ -76,7 +76,7 @@ class Button {
 it('calls the onClick prop when clicking', () => {
   const onClick = jest.fn();
   const component = shallow(<Button onClick={onClick} />);
-  
+
   component.find('button').simulate('click');
   expect(onClick).toHaveBeenCalledTimes(1);
 });
