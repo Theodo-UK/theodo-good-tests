@@ -52,7 +52,7 @@ it('calls customOnChange on onChange when it is present', () => {
       type="text"
     />,
   );
-  component.props().input.onChange(value);
+  component.instance().onChange(value);
   expect(onChange).toHaveBeenCalledWith(value);
   expect(customOnChange).toHaveBeenCalledWith(value);
 });
