@@ -15,12 +15,12 @@ class InputField {
       this.props.customOnChange(value);
     this.props.input.onChange(value);
   }
-  
+
   render() {
     return (
       <div className={this.props.className}>
         <Input
-          cluae={value}
+          value={value}
           {...this.props.input}
           onChange={this.onChange}
           disabled={this.props.disabled}
@@ -38,23 +38,21 @@ class InputField {
 
 ```js
 it('calls customOnChange on onChange when it is present', () => {
-  const customOnChange = jest.fn();
-  const onChange = jest.fn();
-  const input = {
-    onChange,
+  const props = {
+    customOnChange: jest.fn(),
+    input = {
+      onChange: jest.fn(),
+      value: 'mocked_value',
+    },
+    type: 'text',
+    label: 'mocked_label',
   };
-  const value = 30;
-  const component = mount(
-    <InputField
-      customOnChange={customOnChange}
-      input={input}
-      test="test"
-      type="text"
-    />,
-  );
-  component.instance().onChange(value);
-  expect(onChange).toHaveBeenCalledWith(value);
-  expect(customOnChange).toHaveBeenCalledWith(value);
+
+  const component = mount(<InputField {...props} />);
+  component.instance().onChange('mocked_value_2');
+
+  expect(props.input.onChange).toHaveBeenCalledWith('mocked_value_2');
+  expect(props.customOnChange).toHaveBeenCalledWith('mocked_value_2');
 });
 ```
 
