@@ -1,8 +1,13 @@
 # Component
 
+- [General advice](#general-advice)
 - [Passes props to children](#passes-props-to-children)
 - [Render](#render)
 - [User interaction](#user-interaction)
+
+## <a id="general-advice"></a>General advice
+*Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).  
+There is *zero* valid use case for `react-test-renderer` directly: Enzyme is higher level.
 
 ## <a id="passes-props-to-children"></a>Passes props to children
 
