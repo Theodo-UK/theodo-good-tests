@@ -10,20 +10,19 @@
 
 ```js
 class InputField {
+  onChange = value => {
+    if (this.props.customOnChange)
+      this.props.customOnChange(value);
+    this.props.input.onChange(value);
+  }
+  
   render() {
-    if (this.props.customOnChange) {
-      const inputOnChange = this.props.input.onChange;
-      this.props.input.onChange = value => {
-        inputOnChange(value);
-        this.props.customOnChange(value);
-      };
-    }
-
     return (
       <div className={this.props.className}>
         <Input
           cluae={value}
           {...this.props.input}
+          onChange={this.onChange}
           disabled={this.props.disabled}
           label={this.props.label}
           style={this.props.style}
