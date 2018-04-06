@@ -2,7 +2,8 @@
 
 - [General advice](#general-advice)
 - [Passes props to children](#passes-props-to-children)
-- [Render](#render)
+- [JSX rendered](#jsx-rendered)
+- [Styled component](#styled-component)
 - [User interaction](#user-interaction)
 
 ## <a id="general-advice"></a>General advice
@@ -59,7 +60,47 @@ it('calls customOnChange on onChange when it is present', () => {
 });
 ```
 
-## <a id="render"></a>Render
+## <a id="jsx-rendered"></a>JSX rendered
+### Code
+```js
+  class Button {
+    render() {
+      return <div><button/></div>;
+    }
+  }
+```
+
+### Test
+```js
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
+
+it('renders the correct jsx', () => {
+  const component = shallow(<Button />);
+  const tree = toJson(component);
+  expect(tree).toMatchSnapshot();
+});
+```
+
+## <a id="styled-component"></a>Styled component
+### Code
+```js
+import styled from 'styled-components';
+
+const Button = styled.button`
+  margin: 0;
+`
+```
+
+### Test
+```js
+import { render } from 'enzyme';
+
+it('renders the correct style', () => {
+  const component = render(<Button />).toJson();
+  expect(component).toMatchSnapshot();
+});
+```
 
 ## <a id="user-interaction"></a>User interaction
 ### Code
