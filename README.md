@@ -1,10 +1,19 @@
-# Theodo test samples
+# What is a good test?
 
-You are about to write a test in record time.
+A good test is a test that:
+ - aa
+ - bb
+ - cc
+ - ⚠️ After writing your test, ensure that breaking the code actually breaks the test! ⚠️
+ - takes less than 30min to write
+ 
+ # How to write a good test?
 
-Follow the tree down to the example that's relevant to you!
+You can find the M33 working standard here: http://blog.m33.network/2017/07/comment-ecrire-un-bon-test/
 
-⚠️ After writing your test, ensure that breaking the code actually breaks the test! ⚠️
+But a good way to start is to look at the samples here!
+
+
 
 The framework you are using is:
 
