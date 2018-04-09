@@ -95,12 +95,15 @@ const Button = styled.button`
 ### Test
 ```js
 import { render } from 'enzyme';
+import 'jest-styled-components';
 
 it('renders the correct style', () => {
   const component = render(<Button />).toJson();
   expect(component).toMatchSnapshot();
 });
 ```
+
+More info on https://github.com/styled-components/jest-styled-components#snapshot-testing
 
 ## <a id="user-interaction"></a>User interaction
 ### Code
