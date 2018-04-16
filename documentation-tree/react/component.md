@@ -7,6 +7,7 @@
 - [User interaction](#user-interaction)
 - [Component connected to state](#map-state-to-props)
 - [Component can dispatch an action](#map-dispatch-to-props)
+- [Component calls an external library function](#external-library)
 
 ## <a id="general-advice"></a>General advice
 *Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exceptions*: if you have a render prop or a function-as-child-component (eg using react-virtualized) or if you need to test a styled component.
@@ -127,6 +128,34 @@ it('calls the onClick prop when clicking', () => {
 
   component.find('button').simulate('click');
   expect(onClick).toHaveBeenCalledTimes(1);
+});
+```
+
+## <a id="external-library"></a>Component calls an external library function
+### Code
+```js
+import { doSomething } from 'external-node-module';
+
+class Button {
+  render() {
+    return <button onClick={doSomething} />;
+  }
+}
+```
+
+### Test
+```js
+import { doSomething } from 'external-node-module';
+
+jest.mock('external-node-module', () => ({
+  doSomething: jest.fn(),
+}))
+
+it('calls the doSomething from the external node module when clicking', () => {
+  const component = shallow(<Button />);
+
+  component.find('button').simulate('click');
+  expect(doSomething).toHaveBeenCalledTimes(1);
 });
 ```
 
