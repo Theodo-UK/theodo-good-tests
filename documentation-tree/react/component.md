@@ -7,7 +7,7 @@
 - [User interaction](#user-interaction)
 
 ## <a id="general-advice"></a>General advice
-*Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).
+*Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exceptions*: if you have a render prop or a function-as-child-component (eg using react-virtualized) or if you need to test a styled component.
 There is *zero* valid use case for `react-test-renderer` directly: Enzyme is higher level.
 
 ## <a id="passes-props-to-children"></a>Passes props to children
@@ -95,11 +95,13 @@ const Button = styled.button`
 ### Test
 ```js
 import { render } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
 it('renders the correct style', () => {
-  const component = render(<Button />).toJson();
-  expect(component).toMatchSnapshot();
+  const component = render(<Button />);
+  const tree = toJson(component);
+  expect(tree).toMatchSnapshot();
 });
 ```
 
