@@ -5,7 +5,8 @@
 - [JSX rendered](#jsx-rendered)
 - [Styled component](#styled-component)
 - [User interaction](#user-interaction)
-- [Component connected to sate](#map-state-to-props)
+- [Component connected to state](#map-state-to-props)
+- [Component can dispatch an action](#map-dispatch-to-props)
 
 ## <a id="general-advice"></a>General advice
 *Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exceptions*: if you have a render prop or a function-as-child-component (eg using react-virtualized) or if you need to test a styled component.
@@ -175,5 +176,52 @@ it('should retrieve the label from the state', () => {
   const component = wrapper.find('Button');
   
   expect(component.props().label).toEqual('mocked_label');
+});
+```
+
+## <a id="map-dispatch-to-props"></a>Component can dispatch actions
+### Code
+```js
+import { connect } from 'react-redux';
+import { myAction } from '@myactions';
+
+export class Button {
+  render() {
+    return <button />;
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => ({
+  doAction: () => dispatch(myAction(props.label)),
+});
+
+const ButtonWrapper = connect(null, mapDispatchToProps)(Button);
+
+export default ButtonWrapper;
+```
+
+### Test
+If you use a router, you may need to enhance your wrapper with a `ConnectedRouter` from `react-router-redux`.
+
+```js
+import configureStore from 'redux-mock-store';
+const mockStore = configureStore();
+
+// Mock the button to find it easily
+jest.mock('../Button', () => {
+  const Button = () => null;
+  Button.displayName = 'Button';
+  return Button;
+});
+
+it('should retrieve the label from the state', () => {
+  const store = mockStore({});
+  const wrapper = mount(<Provider store={store}><ButtonWrapper label="my_label" /></Provider>);
+  const component = wrapper.find('Button');
+  
+  const doAction = component.props().doAction;
+  expect(doAction).toBeInstanceOf(Function);
+  doAction();
+  expect(store.getActions()).toContainEqual(myAction('my_label'));
 });
 ```
