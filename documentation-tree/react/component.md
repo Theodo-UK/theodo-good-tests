@@ -5,9 +5,12 @@
 - [JSX rendered](#jsx-rendered)
 - [Styled component](#styled-component)
 - [User interaction](#user-interaction)
+- [Component connected to state](#map-state-to-props)
+- [Component can dispatch an action](#map-dispatch-to-props)
+- [Component calls an external library function](#external-library)
 
 ## <a id="general-advice"></a>General advice
-*Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).
+*Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exceptions*: if you have a render prop or a function-as-child-component (eg using react-virtualized) or if you need to test a styled component.
 There is *zero* valid use case for `react-test-renderer` directly: Enzyme is higher level.
 
 ## <a id="passes-props-to-children"></a>Passes props to children
@@ -95,11 +98,13 @@ const Button = styled.button`
 ### Test
 ```js
 import { render } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
 it('renders the correct style', () => {
-  const component = render(<Button />).toJson();
-  expect(component).toMatchSnapshot();
+  const component = render(<Button />);
+  const tree = toJson(component);
+  expect(tree).toMatchSnapshot();
 });
 ```
 
@@ -123,5 +128,129 @@ it('calls the onClick prop when clicking', () => {
 
   component.find('button').simulate('click');
   expect(onClick).toHaveBeenCalledTimes(1);
+});
+```
+
+## <a id="external-library"></a>Component calls an external library function
+### Code
+```js
+import { doSomething } from 'external-node-module';
+
+class Button {
+  render() {
+    return <button onClick={doSomething} />;
+  }
+}
+```
+
+### Test
+```js
+import { doSomething } from 'external-node-module';
+
+jest.mock('external-node-module', () => ({
+  doSomething: jest.fn(),
+}))
+
+it('calls the doSomething from the external node module when clicking', () => {
+  const component = shallow(<Button />);
+
+  component.find('button').simulate('click');
+  expect(doSomething).toHaveBeenCalledTimes(1);
+});
+```
+
+## <a id="map-state-to-props"></a>Component is connected to state
+### Code
+```js
+import { connect } from 'react-redux';
+import { getLabel } from '@myselectors';
+
+export class Button {
+  render() {
+    return <button label={this.props.label} />;
+  }
+}
+
+const mapStateToProps = state => ({
+  label: getLabel(state),
+});
+
+const ButtonWrapper = connect(mapStateToProps)(Button);
+
+export default ButtonWrapper;
+```
+
+### Test
+If you use a router, you may need to enhance your wrapper with a `ConnectedRouter` from `react-router-redux`.
+
+```js
+import configureStore from 'redux-mock-store';
+const mockStore = configureStore();
+
+// Mock the button to find it easily
+jest.mock('../Button', () => {
+  const Button = () => null;
+  Button.displayName = 'Button';
+  return Button;
+});
+
+// Mock the selector to test the value passed
+jest.mock('@myselectors', () => ({
+  getLabel: () => 'mocked_label',
+}));
+
+it('should retrieve the label from the state', () => {
+  const store = mockStore({});
+  const wrapper = mount(<Provider store={store}><ButtonWrapper /></Provider>);
+  const component = wrapper.find('Button');
+  
+  expect(component.props().label).toEqual('mocked_label');
+});
+```
+
+## <a id="map-dispatch-to-props"></a>Component can dispatch actions
+### Code
+```js
+import { connect } from 'react-redux';
+import { myAction } from '@myactions';
+
+export class Button {
+  render() {
+    return <button />;
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => ({
+  doAction: () => dispatch(myAction(props.label)),
+});
+
+const ButtonWrapper = connect(null, mapDispatchToProps)(Button);
+
+export default ButtonWrapper;
+```
+
+### Test
+If you use a router, you may need to enhance your wrapper with a `ConnectedRouter` from `react-router-redux`.
+
+```js
+import configureStore from 'redux-mock-store';
+const mockStore = configureStore();
+
+// Mock the button to find it easily
+jest.mock('../Button', () => {
+  const Button = () => null;
+  Button.displayName = 'Button';
+  return Button;
+});
+
+it('should retrieve the label from the state', () => {
+  const store = mockStore({});
+  const wrapper = mount(<Provider store={store}><ButtonWrapper label="my_label" /></Provider>);
+  const component = wrapper.find('Button');
+  
+  const doAction = component.props().doAction;
+  expect(doAction).toBeInstanceOf(Function);
+  doAction();
+  expect(store.getActions()).toContainEqual(myAction('my_label'));
 });
 ```
