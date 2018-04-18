@@ -5,6 +5,7 @@
 - [JSX rendered](#jsx-rendered)
 - [Styled component](#styled-component)
 - [User interaction](#user-interaction)
+- [Function triggered in a child](#function-triggered-child)
 
 ## <a id="general-advice"></a>General advice
 *Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).
@@ -125,3 +126,45 @@ it('calls the onClick prop when clicking', () => {
   expect(onClick).toHaveBeenCalledTimes(1);
 });
 ```
+
+## <a id="function-triggered-child"></a>Function triggered in a child
+### Code
+```js
+class Parent {
+  state = {value: 'value'}
+
+  render() {
+    const customOnChange = value => this.setState({ value })
+    
+    const firstChildValue = 'firstChildValue';
+  
+    return(
+      <div>
+        <Child onChange={customOnChange} value={firstChildValue} />
+        <Child value={this.state.value} />
+      </div>
+    )        
+  }
+}
+
+class Child {
+  render() {
+    const onChange = this.props.customOnChange && value => this.props.customOnChange(value);
+    return(
+      <p>{`This is the ${this.props.id} I want to display.}`}</p>
+      <Input onChange={onChange} />
+    )
+  }
+}
+```
+
+### Test
+```js
+const component = mount(<Parent />);
+const expectedValue = 'myValue';
+component.find('Input').get(0).props.onChange(expectedValue);
+component.update();
+expect(component.find('Child').get(1).props.value).toBe(expectedValue);
+```
+
+
