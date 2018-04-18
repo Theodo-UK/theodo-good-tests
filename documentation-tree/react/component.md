@@ -134,13 +134,13 @@ class Parent {
   state = {value: 'value'}
 
   render() {
-    const customOnChange = value => this.setState({ value })
+    const onChange = value => this.setState({ value })
     
     const firstChildValue = 'firstChildValue';
   
     return(
       <div>
-        <Child onChange={customOnChange} value={firstChildValue} />
+        <Child onChange={onChange} value={firstChildValue} />
         <Child value={this.state.value} />
       </div>
     )        
@@ -149,9 +149,9 @@ class Parent {
 
 class Child {
   render() {
-    const onChange = this.props.customOnChange && value => this.props.customOnChange(value);
+    const onChange = this.props.onChange && value => this.props.onChange(value);
     return(
-      <p>{`This is the ${this.props.id} I want to display.}`}</p>
+      <p>{`This is the ${this.props.value} I want to display.}`}</p>
       <Input onChange={onChange} />
     )
   }
