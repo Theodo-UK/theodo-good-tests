@@ -6,6 +6,7 @@
 - [Styled component](#styled-component)
 - [User interaction](#user-interaction)
 - [Function triggered in a child](#function-triggered-child)
+- [Component behaviour when props change](#props-change)
 
 ## <a id="general-advice"></a>General advice
 *Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).
@@ -167,4 +168,34 @@ component.update();
 expect(component.find('Child').get(1).props.value).toBe(expectedValue);
 ```
 
+## <a id="props-change"></a>Component behaviour when props change
+
+### Code
+```js
+class Component {
+  render() {
+    return(
+      <p>This is my {this.props.name}</p>
+    )        
+  }
+}
+```
+
+### Test
+```js
+const name = 'Jean-Pierre';
+const newName = 'Robert';
+const component = shallow(<Component name={name} />);
+const tree = toJson(component);
+expect(component).toMatchSnapshot();
+component.setProps({name: newName});
+const newTree = toJson(component);
+expect(component).toMatchSnapshot();
+```
+
+### Goal
+Would fail if you modify the way the component rerenders, for example by modifying the `shouldComponentUpdate` method :
+```js
+shouldComponentUpdate() { return false }
+```
 
