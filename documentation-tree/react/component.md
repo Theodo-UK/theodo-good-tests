@@ -7,6 +7,7 @@
 - [User interaction](#user-interaction)
 - [Function triggered in a child](#function-triggered-child)
 - [Component behaviour when props change](#props-change)
+- [Conditionally-rendered child](#conditionally-rendered-child)
 
 ## <a id="general-advice"></a>General advice
 *Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).
@@ -199,3 +200,19 @@ Would fail if you modify the way the component rerenders, for example by modifyi
 shouldComponentUpdate() { return false }
 ```
 
+### Code
+```js
+class Component {
+  render() {
+    return(
+    )        
+  }
+}
+```
+
+### Test
+```js
+
+```
+
+## <a id="conditionally-rendered-child"></a>Conditionally-rendered child
