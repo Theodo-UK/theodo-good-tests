@@ -200,19 +200,73 @@ Would fail if you modify the way the component rerenders, for example by modifyi
 shouldComponentUpdate() { return false }
 ```
 
+## <a id="conditionally-rendered-child"></a>Conditionally-rendered child
+
 ### Code
 ```js
-class Component {
-  render() {
-    return(
-    )        
+const limitBooks = books => {
+  if (books.length > 3) {
+    return (
+      <div>
+        <p>Too many books in the library!</p>
+      </div>
+    );
+  } else if (books.length == 0) {
+    return (
+      <div>
+        <p>This library is empty...</p>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <p>There are lots of books here:</p>
+        <ul>{books.map((book, index) => <li key={index}>{book.name}</li>)}</ul>
+      </div>
+    );
   }
-}
+};
 ```
 
 ### Test
 ```js
+describe('limitBooks', () => {
+  it('should display the books if under 3 books', () => {
+    const books = [
+      {
+        name: '5 Disfunctions of a Team',
+      },
+      {
+        name: 'Harry Potter and the Chamber of Secrets',
+      },
+      {
+        name: 'The Jungle Book',
+      },
+    ];
+    expect(limitBooks(books)).toMatchSnapshot();
+  });
 
+  it('should return an info message if too many books', () => {
+    const books = [
+      {
+        name: '5 Disfunctions of a Team',
+      },
+      {
+        name: 'Harry Potter and the Chamber of Secrets',
+      },
+      {
+        name: 'The Jungle Book',
+      },
+      {
+        name: 'Les Fourmis',
+      },
+    ];
+    expect(limitBooks(books)).toMatchSnapshot();
+  });
+
+  it('should return an warning message if no books', () => {
+    const books = [];
+    expect(limitBooks(books)).toMatchSnapshot();
+  });
+});
 ```
-
-## <a id="conditionally-rendered-child"></a>Conditionally-rendered child
