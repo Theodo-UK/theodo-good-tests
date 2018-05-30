@@ -5,6 +5,7 @@
 - [JSX rendered](#jsx-rendered)
 - [Styled component](#styled-component)
 - [User interaction](#user-interaction)
+- [User interaction / onChange with 2 arguments](#user-interaction-onchange-2-arguments)
 - [Function triggered in a child](#function-triggered-child)
 - [Component behaviour when props change](#props-change)
 - [Conditionally-rendered child](#conditionally-rendered-child)
@@ -127,6 +128,17 @@ it('calls the onClick prop when clicking', () => {
   component.find('button').simulate('click');
   expect(onClick).toHaveBeenCalledTimes(1);
 });
+```
+
+## <a id="user-interaction-onchange-2-arguments"></a>User interaction / onChange with 2 arguments
+### Code
+```js
+
+```
+
+### Test
+```js
+
 ```
 
 ## <a id="function-triggered-child"></a>Function triggered in a child
