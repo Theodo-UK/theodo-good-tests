@@ -152,7 +152,7 @@ it('calls onChange with 2 arguemnts', () => {
   const wrapper = shallow(<Dropown {...props} />)
   const value = 'aValue'
   wrapper.find(ClientDropdown).simulate('change', null, {value})
-  expect(props.selectCountry).toHaveBeenCalledWith(props.clientId, value)
+  expect(props.selectClient).toHaveBeenCalledWith(props.clientId, value)
 })
 ```
 
