@@ -133,12 +133,27 @@ it('calls the onClick prop when clicking', () => {
 ## <a id="user-interaction-onchange-2-arguments"></a>User interaction / onChange with 2 arguments
 ### Code
 ```js
-
+class Dropdown {
+  render() {
+    return <ClientDropdown
+      onChange={(event, data) => this.props.selectClient(this.props.clientId, data.value)}
+    />
+  }
+}
 ```
 
 ### Test
 ```js
-
+it('calls onChange with 2 arguemnts', () => {
+  const props = {
+    clientId: 'aClientId',
+    selectClient: jest.fn()
+  }
+  const wrapper = shallow(<Dropown {...props} />)
+  const value = 'aValue'
+  wrapper.find(ClientDropdown).simulate('change', null, {value})
+  expect(props.selectCountry).toHaveBeenCalledWith(props.clientId, value)
+})
 ```
 
 ## <a id="function-triggered-child"></a>Function triggered in a child
