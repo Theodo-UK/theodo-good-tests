@@ -312,7 +312,7 @@ import Component from './Component';
 import { action } from 'redux/actions';
 
 const mapDispatchToProps = dispatch => ({
-  action: () => dispatch(action)
+  action: () => dispatch(action())
 }) 
 
 export connect(null, mapDispatchToProps)(Component) 
