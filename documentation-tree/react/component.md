@@ -2,13 +2,18 @@
 
 - [General advice](#general-advice)
 - [Passes props to children](#passes-props-to-children)
-- [JSX rendered](#jsx-rendered)
-- [Styled component](#styled-component)
-- [User interaction](#user-interaction)
-- [User interaction / onChange with 2 arguments](#user-interaction-onchange-2-arguments)
-- [Function triggered in a child](#function-triggered-child)
-- [Component behaviour when props change](#props-change)
-- [Conditionally-rendered child](#conditionally-rendered-child)
+- Component rendering
+  - [JSX rendered](#jsx-rendered)
+  - [Conditionally-rendered component](#conditionally-rendered-component)
+  - [Styled component](#styled-component)
+- User interaction 
+  - [User interaction](#user-interaction)
+  - [User interaction / onChange with 2 arguments](#user-interaction-onchange-2-arguments)
+- Re-render of a component
+  - [Function triggered in a child](#function-triggered-child)
+  - [Component behaviour when props change](#props-change)
+- Component wrapping
+  - [Component that connects to the store to dispatch actions](#map-dispatch-to-props)
 
 ## <a id="general-advice"></a>General advice
 *Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test). *Only exception*: if you have a render prop or a function-as-child-component (eg using react-virtualized).
@@ -227,7 +232,7 @@ Would fail if you modify the way the component rerenders, for example by modifyi
 shouldComponentUpdate() { return false }
 ```
 
-## <a id="conditionally-rendered-child"></a>Conditionally-rendered child
+## <a id="conditionally-rendered-component"></a>Conditionally-rendered component
 
 ### Code
 ```js
@@ -297,3 +302,47 @@ describe('limitBooks', () => {
   });
 });
 ```
+
+## <a id="map-dispatch-to-props"></a>Component that connects to the store to dispatch actions
+
+### Code
+```js
+import { connect } from 'react-redux';
+import Component from './Component';
+import { action } from 'redux/actions';
+
+const mapDispatchToProps = dispatch => ({
+  action: () => dispatch(action)
+}) 
+
+export connect(null, mapDispatchToProps)(Component) 
+```
+
+
+### Test
+```js
+import React from 'react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import Container from '../Container';
+
+const middlewares = [];
+const mockStore = configureStore(middlewares);
+const store = { 
+  ...mockStore({}),
+  injectedReducers: {},
+};
+
+it('dispatches the right action when triggered', () => {
+  const component = mount(
+    <Provider store={store}>
+      <Container />
+    </Provider>
+  ).find('Component');
+  expect(component.props(action)).toBeDefined();
+  expect(store.getActions()).not.toContainEqual(action());
+  component.props().action();
+  expect(store.getActions()).toContainEqual(action());
+})
+```
+
