@@ -160,6 +160,38 @@ it('calls onChange with 2 arguemnts', () => {
   expect(props.selectClient).toHaveBeenCalledWith(props.clientId, value)
 })
 ```
+## <a id="user-interaction-style-change"></a>User interaction style change
+### Code
+```js
+export const Label = styled.span`
+  color: ${props => (props.on ? 'black' : 'red')};
+`;
+class ClickableLabel {
+  constructor(props: Props) {
+    super(props);
+    this.state = { on: false };
+  }
+  render() {
+    return <Lable
+      onClick={() => this.setState({ on: !this.state.on })}
+      on={this.state.on}
+    />
+  }
+}
+```
+
+### Test
+```js
+it('changes label style to react to click', () => {
+  const component = shallow(<ClickableLabel />);
+
+  expect(component.find(Label).first()).toHaveStyleRule('color', 'black');
+
+  component.find(Lable).simulate('click');
+
+  expect(component.find(Label).first()).toHaveStyleRule('color', 'red');
+});
+```
 
 ## <a id="function-triggered-child"></a>Function triggered in a child
 ### Code
