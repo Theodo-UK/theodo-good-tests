@@ -182,6 +182,7 @@ class ClickableLabel {
 
 ### Test
 ```js
+import 'jest-styled-components';
 it('changes label style to react to click', () => {
   const component = shallow(<ClickableLabel />);
 
