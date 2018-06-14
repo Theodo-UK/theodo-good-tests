@@ -9,6 +9,7 @@
 - User interaction 
   - [User interaction](#user-interaction)
   - [User interaction / onChange with 2 arguments](#user-interaction-onchange-2-arguments)
+  - [User interaction style change](#user-interaction-style-change)
 - Re-render of a component
   - [Function triggered in a child](#function-triggered-child)
   - [Component behaviour when props change](#props-change)
@@ -159,6 +160,39 @@ it('calls onChange with 2 arguemnts', () => {
   wrapper.find(ClientDropdown).simulate('change', null, {value})
   expect(props.selectClient).toHaveBeenCalledWith(props.clientId, value)
 })
+```
+## <a id="user-interaction-style-change"></a>User interaction style change
+### Code
+```js
+export const Label = styled.span`
+  color: ${props => (props.on ? 'black' : 'red')};
+`;
+class ClickableLabel {
+  constructor(props: Props) {
+    super(props);
+    this.state = { on: false };
+  }
+  render() {
+    return <Lable
+      onClick={() => this.setState({ on: !this.state.on })}
+      on={this.state.on}
+    />
+  }
+}
+```
+
+### Test
+```js
+import 'jest-styled-components';
+it('changes label style to react to click', () => {
+  const component = shallow(<ClickableLabel />);
+
+  expect(component.find(Label).first()).toHaveStyleRule('color', 'black');
+
+  component.find(Lable).simulate('click');
+
+  expect(component.find(Label).first()).toHaveStyleRule('color', 'red');
+});
 ```
 
 ## <a id="function-triggered-child"></a>Function triggered in a child
