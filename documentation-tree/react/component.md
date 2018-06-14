@@ -9,6 +9,7 @@
 - User interaction 
   - [User interaction](#user-interaction)
   - [User interaction / onChange with 2 arguments](#user-interaction-onchange-2-arguments)
+  - [User interaction style change](#user-interaction-style-change)
 - Re-render of a component
   - [Function triggered in a child](#function-triggered-child)
   - [Component behaviour when props change](#props-change)
