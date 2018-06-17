@@ -1,0 +1,121 @@
+{
+	"snapshot": {
+		"description": "Snapshot test",
+		"prefix": ">snap",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import { shallow } from 'enzyme';",
+			"import toJson from 'enzyme-to-json';",
+			"",
+			"import ${1:component} from '@${2:path}/${1:component}';",
+			"",
+			"it('${1:component} renders correctly', () => {",
+			"  const component = shallow(<${1:component} />);",
+			"  const tree = toJson(component);",
+			"  expect(tree).toMatchSnapshot();",
+			"});",
+			""		
+		]
+	},
+	"snapStyled": {
+		"description": "Snapshot for styled component",
+		"prefix": ">snap-styled",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import { shallow } from 'enzyme';",
+			"import toJson from 'enzyme-to-json';",
+			"import 'jest-styled-components';",
+			"",
+			"import ${1:component} from '@${2:path}/${1:component}';",
+			"",
+			"it('${1:component} renders the correct style', () => {",
+			"  const component = shallow(<${1:component} />);",
+			"  const tree = toJson(component);",
+			"  expect(tree).toMatchSnapshot();",
+			"});",
+			""
+		]
+	},
+	"enzymeClick": {
+		"description": "Checks the onClick prop for a component",
+		"prefix": ">enzyme-click",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import { shallow } from 'enzyme';",
+			"",
+			"import ${1:component} from '@${2:path}/${1:component}';",
+			"",
+			"describe('OnClick prop called for ${1:component}', () => {",
+			"  it('Calls the onClick prop when clicked', () => {",
+			"    const onClickMock = jest.fn();",
+			"    const component = shallow(<${1:component} onClick={onClickMock} />);",
+			"",
+			"    component.simulate('click');",
+			"    expect(onClickMock).toHaveBeenCalledTimes(1);",
+			"  });",
+			"});"
+		]
+	},
+	"reactPureComponent": {
+		"description": "React Pure Component",
+		"prefix": ">rpc",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React, { PureComponent } from 'react';",
+			"import styled from 'styled-components';",
+			"",
+			"type Props = {};",
+			"",
+			"class ${1:component} extends PureComponent<Props> {",
+			"  render() {",
+			"    return (",
+			"      $0",
+			"    );",
+			"  }",
+			"}",
+			"",
+			"export default ${1:component};",
+			""
+		]
+	},
+	"consoleLog": {
+		"description": "Quick Console Logs",
+		"prefix": ">cl",
+		"scope": "javascript",
+		"body": [
+			"console.log('')",
+			"console.log('')",
+			"console.log(${1:print})",
+			"console.log('')",
+			"console.log('')"
+		]
+	},
+	"pdb": {
+		"description": "Pdb Debug",
+		"prefix": ">pdb",
+		"scope": "python",
+		"body": [
+			"import pdb; pdb.set_trace()"
+		]
+	},
+	"pythonPrint": {
+		"description": "Python Print",
+		"prefix": ">pypr",
+		"scope": "python",
+		"body": [
+			"print('')",
+			"print('')",
+			"print(${1:print})",
+			"print('')",
+			"print('')"
+		]
+	}
+	
+}
