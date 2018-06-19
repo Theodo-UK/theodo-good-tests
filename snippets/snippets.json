@@ -59,7 +59,8 @@
 			"    component.simulate('click');",
 			"    expect(onClickMock).toHaveBeenCalledTimes(1);",
 			"  });",
-			"});"
+			"});",
+			""
 		]
 	},
 	"reactPureComponent": {
@@ -97,6 +98,61 @@
 			"console.log('')"
 		]
 	},
+	"djTest": {
+		"description": "Django TestCase setup",
+		"prefix": ">dj-test",
+		"scope": "python",
+		"body": [
+			"\"\"\"",
+			"Test the ${1:module} Module",
+			"\"\"\"",
+			"from django.test import TestCase",
+			"",
+			"class ${1:module}TestCase(TestCase):",
+			"    \"\"\"",
+			"    Test the ${1:module} Module",
+			"    \"\"\"",
+			"",
+			"    def test_${2:test_name}(self):",
+			"        \"\"\"",
+			"        Tests ${3:test_description}",
+			"        \"\"\"",
+			"        $0",
+			"        self.assertEqual()",
+			""
+		]
+	},
+	"djTestView": {
+		"description": "Tests a django view",
+		"prefix": ">dj-test-view",
+		"scope": "python",
+		"body": [
+			"\"\"\"",
+			"${1:View} test case",
+			"\"\"\"",
+			"",
+			"from django.test import TestCase, Client",
+			"",
+			"class ${1:View}ViewTestCase(TestCase):",
+			"    \"\"\"",
+			"    ${1:View} test case",
+			"    \"\"\"",
+			"    def setUp(self):",
+			"        \"\"\"",
+			"        Sets up client",
+			"        \"\"\"",
+			"        self.client = Client()",
+			"",
+			"    def test_get(self):",
+			"        \"\"\"",
+			"        Tests a GET request",
+			"        \"\"\"",
+			"        response = self.client.get('${2:url}')",
+			"        self.assertEqual(response.status_code, 200)",
+			"        self.assertEqual(response.data, {$0})",
+			""
+		]
+	},	
 	"pdb": {
 		"description": "Pdb Debug",
 		"prefix": ">pdb",
@@ -107,7 +163,7 @@
 	},
 	"pythonPrint": {
 		"description": "Python Print",
-		"prefix": ">pypr",
+		"prefix": ">pr",
 		"scope": "python",
 		"body": [
 			"print('')",

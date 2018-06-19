@@ -11,6 +11,13 @@ See [Set Up](./setup.md) to learn how to use these
 | Enzyme - checks onClick | `>enzyme-click` | `component`, `path` |
 | React Pure Component Template| `>rpc` | `component` |
 
+## Django
+
+| Description | Shortcut | Arguments |
+|--- | --- | --- |
+| Simple TestCase | `>dj-test` | `module`, `test_name`, `test_description` |
+| View TestCase | `>dj-test-view` | `view`, `url` |
+
 ## Javascript
 
 | Description | Shortcut | Arguments |
@@ -21,5 +28,5 @@ See [Set Up](./setup.md) to learn how to use these
 
 | Description | Shortcut | Arguments |
 |--- | --- | --- |
-| Print with padding | `>pypr` |  |
+| Print with padding | `>pr` |  |
 | PDB setup | `>pdb` |  |

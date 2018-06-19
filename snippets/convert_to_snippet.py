@@ -15,9 +15,9 @@ def convert_snippet():
             output.write('\t"prefix": "%s",\n' % prefix)
             if scope: output.write('\t"scope": "%s",\n' % scope)
             output.write('\t"body": [\n')
-            output.write('\t\t"%s"' % input.readline().rstrip('\n'))            
+            output.write('\t\t"%s"' % input.readline().replace('"', '\\"').rstrip('\n'))            
             for line in input:
-                output.write(',\n\t\t"%s"' % line.rstrip('\n'))
+                output.write(',\n\t\t"%s"' % line.replace('"', '\\"').rstrip('\n'))
             output.write('\n\t]\n')
             output.write('}\n')
     print('Snippet written to snip.json')
