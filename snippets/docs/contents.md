@@ -6,11 +6,11 @@ See [Set Up](./setup.md) to learn how to use these
 
 | Description | Shortcut | Arguments |
 |--- | --- | --- |
-| Simple Snapshot | `>snap` | `component`, `path` |
-| Snapshot of styled component | `>snap-styled` | `component`, `path` |
-| Enzyme - checks onClick | `>enzyme-click` | `component`, `path` |
-| Basic Saga Test | `>test-saga` | `multiple..` |
-| React Pure Component Template| `>rpc` | `component` |
+| Simple Snapshot | `>re-snap` | `component`, `path` |
+| Snapshot of styled component | `>re-snap-styled` | `component`, `path` |
+| Enzyme - checks onClick | `>re-enzyme-click` | `component`, `path` |
+| Basic Saga Test | `>re-test-saga` | `multiple..` |
+| React Pure Component Template| `>re-pure` | `component` |
 
 ## Django
 

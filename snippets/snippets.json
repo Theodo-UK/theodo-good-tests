@@ -1,7 +1,7 @@
 {
 	"snapshot": {
 		"description": "Snapshot test",
-		"prefix": ">snap",
+		"prefix": ">re-snap",
 		"scope": "javascript",
 		"body": [
 			"// @flow",
@@ -21,7 +21,7 @@
 	},
 	"snapStyled": {
 		"description": "Snapshot for styled component",
-		"prefix": ">snap-styled",
+		"prefix": ">re-snap-styled",
 		"scope": "javascript",
 		"body": [
 			"// @flow",
@@ -42,7 +42,7 @@
 	},
 	"enzymeClick": {
 		"description": "Checks the onClick prop for a component",
-		"prefix": ">enzyme-click",
+		"prefix": ">re-enzyme-click",
 		"scope": "javascript",
 		"body": [
 			"// @flow",
@@ -65,7 +65,7 @@
 	},
 	"reactPureComponent": {
 		"description": "React Pure Component",
-		"prefix": ">rpc",
+		"prefix": ">re-pure",
 		"scope": "javascript",
 		"body": [
 			"// @flow",
@@ -88,7 +88,7 @@
 	},
 	"testSaga": {
 		"description": "Basic test case for a saga",
-		"prefix": ">test-saga",
+		"prefix": ">re-test-saga",
 		"scope": "javascript",
 		"body": [
 			"// @flow",
