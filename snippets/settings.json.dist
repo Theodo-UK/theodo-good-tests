@@ -2,6 +2,6 @@
   "files": [
     "snippets.json"
   ],
-  "output_file": "/Users/__user__/Library/Application Support/Code/User/snippets/combined.code-snippets",
+  "output_file": "~/Library/Application Support/Code/User/snippets/combined.code-snippets",
   "flow": false
 }

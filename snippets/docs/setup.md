@@ -6,11 +6,6 @@
 ## Settings
 
 - Create a settings file: `cp settings.json.dist settings.json`
-- Edit `output_file` to point to your VSCode snippets
-  - If the given path is incorrect:
-    - Open `Code > Preferences > User Snippets` (Mac)
-    - `New Global snippets file...`
-    - Save a test file and get its path
 - If your project uses flow turn flow to true
 
 ## Get Started
@@ -25,6 +20,25 @@
   - Hit tab
   - Snap shot template created
 - See other examples [here](./contents.md)
+
+## Troubleshoot
+
+If the above example doesn't work:
+
+- The output file in `settings.json` may be incorrect:
+  - In VSCode, Open `Code > Preferences > User Snippets` (Mac)
+  - `New Global snippets file...`
+  - Save a test file and get its path
+  - Update if different
+- In VSCode settings (Cmd + shift = P -> type settings), add the following:
+```
+  "editor.tabCompletion": true,
+  "editor.snippetSuggestions": "top",
+```
+- If you have emmet enabled in VSCode it may interfere with your snippets on tab press in some cases. To counter this set the following. In this case you can press `esc` to cancel an emmet expansion if it pops up
+```
+  "emmet.showSuggestionsAsSnippets": true,
+```
 
 ## Personalise
 

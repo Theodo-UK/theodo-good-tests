@@ -36,7 +36,7 @@ def apply_settings():
 
     global files, output_file, flow
     files = data.get('files')
-    output_file = data.get('output_file')
+    output_file = os.path.expanduser(data.get('output_file'))
     if 'flow' in keys: flow = data.get('flow')
 
 def check_flow():
