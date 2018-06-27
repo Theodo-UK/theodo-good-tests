@@ -9,6 +9,8 @@ See [Set Up](./setup.md) to learn how to use these
 | Simple Snapshot | `>re-snap` | `component`, `path` |
 | Snapshot of styled component | `>re-snap-styled` | `component`, `path` |
 | Enzyme - checks onClick | `>re-enzyme-click` | `component`, `path` |
+| Enzyme - describe template | `>re-enzyme-describe` | `describe`, `it` |
+| Enzyme - it template | `>re-enzyme-it` | `it` |
 | Basic Saga Test | `>re-test-saga` | `multiple..` |
 | React Function Component Template| `>re-fcn-comp` | `component` |
 | React Pure Component Template| `>re-pure` | `component` |

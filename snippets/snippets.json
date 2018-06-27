@@ -63,6 +63,28 @@
 			""
 		]
 	},
+	"testDescribeTemplate": {
+		"description": "describe test template",
+		"prefix": ">re-enzyme-describe",
+		"scope": "javascript",
+		"body": [
+			"describe('${1:describe}', () => {",
+			"  it('${2:it}', () => {",
+			"    $0",
+			"  });",
+			"});"
+		]
+	},
+	"testItTemplate": {
+		"description": "it test template",
+		"prefix": ">re-enzyme-it",
+		"scope": "javascript",
+		"body": [
+			"it('${1:it}', () => {",
+			"  $0",
+			"});"
+		]
+	},	
 	"reactPureComponent": {
 		"description": "React Pure Component",
 		"prefix": ">re-pure",
