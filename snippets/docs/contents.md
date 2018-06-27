@@ -11,6 +11,7 @@ See [Set Up](./setup.md) to learn how to use these
 | Enzyme - checks onClick | `>re-enzyme-click` | `component`, `path` |
 | Enzyme - describe template | `>re-enzyme-describe` | `describe`, `it` |
 | Enzyme - it template | `>re-enzyme-it` | `it` |
+| Enzyme - Basic Reducer Test | `>re-enzyme-reducer` | `multiple..` |
 | Enzyme - Basic Saga Test | `>re-enzyme-saga` | `multiple..` |
 | React Function Component Template| `>re-fcn-comp` | `component` |
 | React Pure Component Template| `>re-pure` | `component` |

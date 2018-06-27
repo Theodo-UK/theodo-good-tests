@@ -85,6 +85,30 @@
 			"});"
 		]
 	},
+	"testReducer": {
+		"description": "Basic test case for reducer",
+		"prefix": ">re-enzyme-reducer",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import ${1:reducer} from '@redux/${2:reducer_path}';",
+			"import { ${3:action_type} } from '@redux/${4:action_type_path}';",
+			"",
+			"",
+			"describe('${1:reducer} reducer', () => {",
+			"  it('should handle ${3:action_type} action on initial state', () => {",
+			"    const action = {",
+			"      type: ${3:action_type},",
+			"    };",
+			"    const initialState = {$0};",
+			"    const result = {};",
+			"",
+			"    const newState = accountReducer(initialState, action);",
+			"    expect(newState).toEqual(result);",
+			"  });",
+			"});"
+		]
+	},
 	"testSaga": {
 		"description": "Basic test case for a saga",
 		"prefix": ">re-enzyme-saga",
