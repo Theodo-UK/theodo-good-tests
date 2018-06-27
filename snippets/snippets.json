@@ -84,51 +84,10 @@
 			"  $0",
 			"});"
 		]
-	},	
-	"reactPureComponent": {
-		"description": "React Pure Component",
-		"prefix": ">re-pure",
-		"scope": "javascript",
-		"body": [
-			"// @flow",
-			"import React, { PureComponent } from 'react';",
-			"import styled from 'styled-components';",
-			"",
-			"type Props = {};",
-			"",
-			"class ${1:component} extends PureComponent<Props> {",
-			"  render() {",
-			"    return (",
-			"      $0",
-			"    );",
-			"  }",
-			"}",
-			"",
-			"export default ${1:component};",
-			""
-		]
-	},
-	"reactFcnComponent": {
-		"description": "React Function Component",
-		"prefix": ">re-fcn-comp",
-		"scope": "javascript",
-		"body": [
-			"// @flow",
-			"import React from 'react';",
-			"import styled from 'styled-components';",
-			"",
-			"type Props = {};",
-			"",
-			"const ${1:component} = (props: Props) => (",
-			"  $0",
-			");",
-			"",
-			"export default ${1:component};"
-		]
 	},
 	"testSaga": {
 		"description": "Basic test case for a saga",
-		"prefix": ">re-test-saga",
+		"prefix": ">re-enzyme-saga",
 		"scope": "javascript",
 		"body": [
 			"// @flow",
@@ -164,6 +123,47 @@
 			"    expect(sagaTester.getLatestCalledAction()).toEqual(${6:success_action}());",
 			"  });",
 			"});"
+		]
+	},
+	"reactFcnComponent": {
+		"description": "React Function Component",
+		"prefix": ">re-fcn-comp",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import styled from 'styled-components';",
+			"",
+			"type Props = {};",
+			"",
+			"const ${1:component} = (props: Props) => (",
+			"  $0",
+			");",
+			"",
+			"export default ${1:component};"
+		]
+	},
+	"reactPureComponent": {
+		"description": "React Pure Component",
+		"prefix": ">re-pure",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React, { PureComponent } from 'react';",
+			"import styled from 'styled-components';",
+			"",
+			"type Props = {};",
+			"",
+			"class ${1:component} extends PureComponent<Props> {",
+			"  render() {",
+			"    return (",
+			"      $0",
+			"    );",
+			"  }",
+			"}",
+			"",
+			"export default ${1:component};",
+			""
 		]
 	},
 	"consoleLog": {
