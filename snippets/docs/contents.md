@@ -10,6 +10,7 @@ See [Set Up](./setup.md) to learn how to use these
 | Snapshot of styled component | `>re-snap-styled` | `component`, `path` |
 | Enzyme - checks onClick | `>re-enzyme-click` | `component`, `path` |
 | Basic Saga Test | `>re-test-saga` | `multiple..` |
+| React Function Component Template| `>re-fcn-comp` | `component` |
 | React Pure Component Template| `>re-pure` | `component` |
 
 ## Django
