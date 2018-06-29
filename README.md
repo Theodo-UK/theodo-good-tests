@@ -17,3 +17,13 @@ A good test is a test that:
 - has an explicit name (refers to the tested function and the use case)
 - tests all relevant use cases
 - takes less than 20 minutes to write
+
+# Snippets
+
+A collection of snippets for all devs to use within VSCode.
+
+Given this is a testing repo, these can be templates for different forms of tests, but all form of templates/snippets can/should be added here
+
+- [Setting Up](./snippets/docs/setup.md)
+- [Contents](./snippets/docs/contents.md)
+- [Create Your Own](./snippets/docs/create.md)

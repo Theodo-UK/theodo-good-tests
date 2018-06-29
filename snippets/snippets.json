@@ -1,0 +1,281 @@
+{
+	"snapshot": {
+		"description": "Snapshot test",
+		"prefix": ">re-snap",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import { shallow } from 'enzyme';",
+			"import toJson from 'enzyme-to-json';",
+			"",
+			"import ${1:component} from '@${2:path}/${1:component}';",
+			"",
+			"it('${1:component} renders correctly', () => {",
+			"  const component = shallow(<${1:component} />);",
+			"  const tree = toJson(component);",
+			"  expect(tree).toMatchSnapshot();",
+			"});",
+			""		
+		]
+	},
+	"snapStyled": {
+		"description": "Snapshot for styled component",
+		"prefix": ">re-snap-styled",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import { shallow } from 'enzyme';",
+			"import toJson from 'enzyme-to-json';",
+			"import 'jest-styled-components';",
+			"",
+			"import ${1:component} from '@${2:path}/${1:component}';",
+			"",
+			"it('${1:component} renders the correct style', () => {",
+			"  const component = shallow(<${1:component} />);",
+			"  const tree = toJson(component);",
+			"  expect(tree).toMatchSnapshot();",
+			"});",
+			""
+		]
+	},
+	"enzymeClick": {
+		"description": "Checks the onClick prop for a component",
+		"prefix": ">re-enzyme-click",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import { shallow } from 'enzyme';",
+			"",
+			"import ${1:component} from '@${2:path}/${1:component}';",
+			"",
+			"describe('OnClick prop called for ${1:component}', () => {",
+			"  it('Calls the onClick prop when clicked', () => {",
+			"    const onClickMock = jest.fn();",
+			"    const component = shallow(<${1:component} onClick={onClickMock} />);",
+			"",
+			"    component.simulate('click');",
+			"    expect(onClickMock).toHaveBeenCalledTimes(1);",
+			"  });",
+			"});",
+			""
+		]
+	},
+	"testDescribeTemplate": {
+		"description": "describe test template",
+		"prefix": ">re-enzyme-describe",
+		"scope": "javascript",
+		"body": [
+			"describe('${1:describe}', () => {",
+			"  it('${2:it}', () => {",
+			"    $0",
+			"  });",
+			"});"
+		]
+	},
+	"testItTemplate": {
+		"description": "it test template",
+		"prefix": ">re-enzyme-it",
+		"scope": "javascript",
+		"body": [
+			"it('${1:it}', () => {",
+			"  $0",
+			"});"
+		]
+	},
+	"testReducer": {
+		"description": "Basic test case for reducer",
+		"prefix": ">re-enzyme-reducer",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import ${1:reducer} from '@redux/${2:reducer_path}';",
+			"import { ${3:action_type} } from '@redux/${4:action_type_path}';",
+			"",
+			"",
+			"describe('${1:reducer} reducer', () => {",
+			"  it('should handle ${3:action_type} action on initial state', () => {",
+			"    const action = {",
+			"      type: ${3:action_type},",
+			"    };",
+			"    const initialState = {$0};",
+			"    const result = {};",
+			"",
+			"    const newState = accountReducer(initialState, action);",
+			"    expect(newState).toEqual(result);",
+			"  });",
+			"});"
+		]
+	},
+	"testSaga": {
+		"description": "Basic test case for a saga",
+		"prefix": ">re-enzyme-saga",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"",
+			"import SagaTester from 'redux-saga-tester';",
+			"",
+			"import saga from '@redux/${1:saga_path}';",
+			"import reducer from '@redux/${2:reducer_path}';",
+			"import { ${3:success_action_type} } from '@redux/${4:action_type_path}';",
+			"import { ${5:request_action}, ${6:success_action} } from '@redux/${7:actions_path}';",
+			"",
+			"",
+			"describe('${5:request_action} Saga Test', () => {",
+			"  let sagaTester;",
+			"  beforeEach(() => {",
+			"    sagaTester = new SagaTester({",
+			"      initialState: {",
+			"        ${8:module}: {}",
+			"      },",
+			"      reducers: { ${8:module}: reducer },",
+			"    });",
+			"    // This attaches the saga to the store",
+			"    sagaTester.start(saga);",
+			"  });",
+			"",
+			"  it('should send a REQUEST and then a SUCCESS action', async () => {",
+			"    sagaTester.dispatch(${5:request_action}());",
+			"",
+			"    // Wait for the saga to finish (it emits the SUCCESS action when its done)",
+			"    await sagaTester.waitFor(${3:success_action_type});",
+			"",
+			"    // Check that the success action is what we expect it to be",
+			"    expect(sagaTester.getLatestCalledAction()).toEqual(${6:success_action}());",
+			"  });",
+			"});"
+		]
+	},
+	"reactFcnComponent": {
+		"description": "React Function Component",
+		"prefix": ">re-fcn-comp",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import styled from 'styled-components';",
+			"",
+			"type Props = {};",
+			"",
+			"const ${1:component} = (props: Props) => (",
+			"  $0",
+			");",
+			"",
+			"export default ${1:component};"
+		]
+	},
+	"reactPureComponent": {
+		"description": "React Pure Component",
+		"prefix": ">re-pure",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React, { PureComponent } from 'react';",
+			"import styled from 'styled-components';",
+			"",
+			"type Props = {};",
+			"",
+			"class ${1:component} extends PureComponent<Props> {",
+			"  render() {",
+			"    return (",
+			"      $0",
+			"    );",
+			"  }",
+			"}",
+			"",
+			"export default ${1:component};",
+			""
+		]
+	},
+	"consoleLog": {
+		"description": "Quick Console Logs",
+		"prefix": ">cl",
+		"scope": "javascript",
+		"body": [
+			"console.log('')",
+			"console.log('')",
+			"console.log(${1:print})",
+			"console.log('')",
+			"console.log('')"
+		]
+	},
+	"djTest": {
+		"description": "Django TestCase setup",
+		"prefix": ">dj-test",
+		"scope": "python",
+		"body": [
+			"\"\"\"",
+			"Test the ${1:module} Module",
+			"\"\"\"",
+			"from django.test import TestCase",
+			"",
+			"class ${1:module}TestCase(TestCase):",
+			"    \"\"\"",
+			"    Test the ${1:module} Module",
+			"    \"\"\"",
+			"",
+			"    def test_${2:test_name}(self):",
+			"        \"\"\"",
+			"        Tests ${3:test_description}",
+			"        \"\"\"",
+			"        $0",
+			"        self.assertEqual()",
+			""
+		]
+	},
+	"djTestView": {
+		"description": "Tests a django view",
+		"prefix": ">dj-test-view",
+		"scope": "python",
+		"body": [
+			"\"\"\"",
+			"${1:View} test case",
+			"\"\"\"",
+			"",
+			"from django.test import TestCase, Client",
+			"",
+			"class ${1:View}ViewTestCase(TestCase):",
+			"    \"\"\"",
+			"    ${1:View} test case",
+			"    \"\"\"",
+			"    def setUp(self):",
+			"        \"\"\"",
+			"        Sets up client",
+			"        \"\"\"",
+			"        self.client = Client()",
+			"",
+			"    def test_get(self):",
+			"        \"\"\"",
+			"        Tests a GET request",
+			"        \"\"\"",
+			"        response = self.client.get('${2:url}')",
+			"        self.assertEqual(response.status_code, 200)",
+			"        self.assertEqual(response.data, {$0})",
+			""
+		]
+	},	
+	"pdb": {
+		"description": "Pdb Debug",
+		"prefix": ">pdb",
+		"scope": "python",
+		"body": [
+			"import pdb; pdb.set_trace()"
+		]
+	},
+	"pythonPrint": {
+		"description": "Python Print",
+		"prefix": ">pr",
+		"scope": "python",
+		"body": [
+			"print('')",
+			"print('')",
+			"print(${1:print})",
+			"print('')",
+			"print('')"
+		]
+	}
+	
+}
