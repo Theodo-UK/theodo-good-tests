@@ -109,6 +109,36 @@
 			"});"
 		]
 	},
+	"testRouter": {
+		"description": "Test your react router",
+		"prefix": ">re-enzyme-router",
+		"scope": "javascript",
+		"body": [
+			"// @flow",
+			"import React from 'react';",
+			"import { shallow } from 'enzyme';",
+			"import { Route } from 'react-router';",
+			"",
+			"import Router from '@src/router.jsx';",
+			"import ${1:MainPage} from '@pages/${1:MainPage}';",
+			"",
+			"",
+			"it('renders correct routes', () => {",
+			"  const wrapper = shallow(<Router />);",
+			"  const pathMap = wrapper.find(Route).reduce((pathMap, route) => {",
+			"    const routeProps = route.props();",
+			"    pathMap[routeProps.path] = routeProps.component;",
+			"    return pathMap;",
+			"  }, {});",
+			"",
+			"  const expectedPaths = {",
+			"    '/': ${1:MainPage},",
+			"    '/${2:url}': ${1:MainPage},",
+			"  };",
+			"  expect(pathMap).toEqual(expectedPaths);",
+			"});"
+		]
+	},	
 	"testSaga": {
 		"description": "Basic test case for a saga",
 		"prefix": ">re-enzyme-saga",
