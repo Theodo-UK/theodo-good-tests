@@ -256,9 +256,9 @@
 			""
 		]
 	},
-	"djTestView": {
-		"description": "Tests a django view",
-		"prefix": ">dj-test-view",
+	"djTestViewSetup": {
+		"description": "Setup for testing django views",
+		"prefix": ">dj-test-view-setup",
 		"scope": "python",
 		"body": [
 			"\"\"\"",
@@ -277,14 +277,39 @@
 			"        \"\"\"",
 			"        self.client = Client()",
 			"",
-			"    def test_get(self):",
-			"        \"\"\"",
-			"        Tests a GET request",
-			"        \"\"\"",
-			"        response = self.client.get('${2:url}')",
-			"        self.assertEqual(response.status_code, 200)",
-			"        self.assertEqual(response.data, {$0})",
-			""
+			"    $0"
+		]
+	},
+	"djTestViewGet": {
+		"description": "Django test for a GET",
+		"prefix": ">dj-test-get",
+		"scope": "python",
+		"body": [
+			"def test_get(self):",
+			"    \"\"\"",
+			"    Tests a GET request",
+			"    \"\"\"",
+			"    response = self.client.get('${1:url}')",
+			"    self.assertEqual(response.status_code, 200)",
+			"    self.assertEqual(response.data, {$0})"
+		]
+	},
+	"djTestViewPost": {
+		"description": "Django test for a POST",
+		"prefix": ">dj-test-post",
+		"scope": "python",
+		"body": [
+			"def test_post(self):",
+			"    \"\"\"",
+			"    Test a POST request",
+			"    \"\"\"",
+			"    response = self.client.post('${1:url}', {",
+			"        ${2:req_body}",
+			"    })",
+			"",
+			"",
+			"    self.assertEqual(response.status_code, 200)",
+			"    self.assertEqual(response.data, {${3:resp_data}})"
 		]
 	},	
 	"pdb": {
