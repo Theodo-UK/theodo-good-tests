@@ -22,7 +22,9 @@ See [Set Up](./setup.md) to learn how to use these
 | Description | Shortcut | Arguments |
 |--- | --- | --- |
 | Simple TestCase | `>dj-test` | `module`, `test_name`, `test_description` |
-| View TestCase | `>dj-test-view` | `view`, `url` |
+| View TestCase Setup | `>dj-test-view-setup` | `view`, `test_name` |
+| GET Request Test (after view setup) | `>dj-test-get` | `url` |
+| POST Request Test (after view setup) | `>dj-test-post` | `url`, `req_body`, `resp_data` |
 
 ## Javascript
 
