@@ -25,6 +25,7 @@ See [Set Up](./setup.md) to learn how to use these
 | View TestCase Setup | `>dj-test-view-setup` | `view`, `test_name` |
 | GET Request Test (after view setup) | `>dj-test-get` | `url` |
 | POST Request Test (after view setup) | `>dj-test-post` | `url`, `req_body`, `resp_data` |
+| Mock Response Class | `>dj-mock-response` | `response_desc`, `status_code` |
 
 ## Javascript
 

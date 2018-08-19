@@ -311,6 +311,19 @@
 			"    self.assertEqual(response.status_code, 200)",
 			"    self.assertEqual(response.data, {${3:resp_data}})"
 		]
+	},
+	"djMockResponse": {
+		"description": "Mock response class",
+		"prefix": ">dj-mock-response",
+		"scope": "python",
+		"body": [
+			"class Mock${1:response_desc}Response():",
+			"    \"\"\"",
+			"    Mocks a ${1:response_desc} Response",
+			"    \"\"\"",
+			"    status_code = ${2:status_code}",
+			"    $0"
+		]
 	},	
 	"pdb": {
 		"description": "Pdb Debug",
