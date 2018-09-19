@@ -1,8 +1,9 @@
 # Mocking a Third Party
 
+Suppose we have a view that makes a request to `sample-url.com` which responds differently depending on the third party response
+
 ### Code
 
-Suppose we have a view that makes a request to `sample-url.com` which responds differently depending on the third party response
 
 ```python
 # <my_project>/<app_name>/views/sampleview.py
@@ -74,7 +75,7 @@ Here we test posting to the endpoint and the different outcomes depending on the
 ```python
 from unittest import mock
 from django.test import TestCase, Client
-from .mock_response2 import MockGoodResponse, MockBadResponse, Mock400Response
+from .mock_responses import MockGoodResponse, MockBadResponse, Mock400Response
 
 class SampleViewTestCase(TestCase):
     def setUp(self):
