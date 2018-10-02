@@ -19,6 +19,7 @@
   - A good test therefore doesn't just inform of a bug but shows where to fix it
 - To document the use cases of a function
 - To improve the quality of our code
+- To implement complex functions by enforcing business logic with tests 
 
 
 
