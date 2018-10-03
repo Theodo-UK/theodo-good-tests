@@ -30,6 +30,9 @@ If the above example doesn't work:
   - `New Global snippets file...`
   - Save a test file and get its path
   - Update if different
+- Sometimes VSCode does not open up the suggestions when you begin typing a snippet. For 100% success add a shortcut for the insert snippet command:
+  - Open Keyboard shortcuts (Code -> Preferences -> Keyboard Shortcuts)
+  - Search for `editor.action.insertSnippet` and set it to your choice (Option: `ctrl + .`)
 - In VSCode settings (Cmd + shift = P -> type settings), add the following:
 ```
   "editor.tabCompletion": true,
