@@ -75,6 +75,14 @@ class TestCase(TestCase):
         self.assertEqual(app(2, 3), 'fakefoo fakebar')
         mock_foo.assert_called_with(2)
         mock_bar.assert_called_with(3)
+
+    @mock.patch('project.fcns.foo')
+    def test_mock_foo_inside(self, mock_foo):
+        """
+        You can alternatively set the return_value inside the function
+        """
+        mock_foo.return_value='fakefoo'
+        self.assertEqual(app(2, 3), 'fakefoo 3 bar')
 ```
 
 #### Mock and check called / called with arguments
