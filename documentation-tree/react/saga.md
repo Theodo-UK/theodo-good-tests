@@ -36,15 +36,16 @@ import * as actionTypes from './actionTypes';
 export function* fetchDataSaga(): Saga<void> {
   try {
     const resp = yield call(fetch, '/api/endpoint');
-    const cars = yield resp.json();
-    yield put(fetchDataSuccess(cars.availableCars));
+    const result = yield resp.json();
+    yield put(fetchDataSuccess(result.data));
+    yield put(push('/data-page'))
   } 
   catch error {
-    yield put(fetchDataFailure(error.data))
+    yield put(fetchDataFailure(error.body))
   }
 }
 
-export default function* carSagas(): Saga<void> {
+export default function* dataSaga(): Saga<void> {
   yield takeEvery(actionTypes.LOOKUP.FETCH, fetchDataSaga);
 }
 ```
@@ -55,11 +56,11 @@ export default function* carSagas(): Saga<void> {
 import SagaTester from 'redux-saga-tester';
 
 import mySaga from '@redux/module/sagas';
-import * as actionTypes from '@redux/modules/cars/actionTypes';
-import { fetchData, fetchDatsSuccess } from '@redux/modules/cars/actions';
+import * as actionTypes from '@redux/modules/data/actionTypes';
+import { fetchData, fetchDataSuccess } from '@redux/modules/data/actions';
 import myReducer from '@redux/module/reducer';
 
-describe('fetchCarsSaga test', () => {
+describe('fetchDataSaga test', () => {
   let sagaTester;
 
   beforeEach(() => {
@@ -85,12 +86,12 @@ describe('fetchCarsSaga test', () => {
     // Start the integration test by dispatching the first action
     sagaTester.dispatch(fetchData());
 
-    // Wait for the saga to finish (it emits the SUCCESS action when its done)
-    await sagaTester.waitFor(actionTypes.LOOKUP.SUCCESS);
-
     // Check that the success action is what we expect it to be
-    expect(sagaTester.getLatestCalledAction()).toEqual(fetchDataSuccess([{ model: 'test', make: 'testy' }]));
-    expect(sagaTester.getState().myReducer.data).toEqual(['wow some api']);
+    const calledActions = sagaTester.getCalledActions();
+
+    expect(calledActions[0]).toEqual(fetchData);
+    expect(calledActions[1]).toEqual(fetchDataSuccess([{ model: 'test', make: 'testy' }]));
+    expect(calledActions[2]).toEqual(push('/data-page'))
   });
 });
 
