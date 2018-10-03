@@ -1,6 +1,6 @@
 - [Component](./react/component.md)
 - [Reducer](./react/reducer.md)
 - [Router](./react/router.md)
-- [Saga (Not yet added)](./react/saga.md)
+- [Saga](./react/saga.md)
 - [Selector](./react/selector.md)
 - [Service (Not yet added)](./react/service.md)
