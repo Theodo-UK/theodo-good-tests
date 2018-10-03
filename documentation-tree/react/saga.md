@@ -86,7 +86,7 @@ describe('fetchDataSaga test', () => {
     // Start the integration test by dispatching the first action
     sagaTester.dispatch(fetchData());
 
-    // Check that the success action is what we expect it to be
+    // Check that the actions that have been emitted by the saga are what we expect
     const calledActions = sagaTester.getCalledActions();
 
     expect(calledActions[0]).toEqual(fetchData);
