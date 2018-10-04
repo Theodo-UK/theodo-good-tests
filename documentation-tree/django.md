@@ -2,6 +2,7 @@
 
 ### Test types
 - [End-to-end](./django/end-to-end.md)
+  - [Exceptions](./django/end-to-end/exceptions.md)
 - [Service](./django/service.md)
 
 ### Mocking/Fixtures
