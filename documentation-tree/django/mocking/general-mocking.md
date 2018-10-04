@@ -2,7 +2,7 @@
 
 Mocking is very useful when running tests
 - If you want to write a unit test for a small part of your code you mightn't want to worry about what the rest of your code does or expects to receives
-- If you make calls to [third parties]((./mock-third-party.md)) you most likely do not want to make calls to this third party from within your test suite
+- If you make calls to [third parties](./mock-third-party.md) you most likely do not want to make calls to this third party from within your test suite
 
 You can use [unittest.mock.patch](https://docs.python.org/3/library/unittest.mock.html) to mock from within django
 
@@ -75,6 +75,14 @@ class TestCase(TestCase):
         self.assertEqual(app(2, 3), 'fakefoo fakebar')
         mock_foo.assert_called_with(2)
         mock_bar.assert_called_with(3)
+
+    @mock.patch('project.fcns.foo')
+    def test_mock_foo_inside(self, mock_foo):
+        """
+        You can alternatively set the return_value inside the function
+        """
+        mock_foo.return_value='fakefoo'
+        self.assertEqual(app(2, 3), 'fakefoo 3 bar')
 ```
 
 #### Mock and check called / called with arguments
@@ -106,8 +114,21 @@ def test_mock_foo_check_args_with_any(self, mock_foo):
     mock_foo.assert_called_with(mock.ANY)
 ```
 
-#### Side effects
+#### <a id="side-effects"></a>Side effects - Multiple return values
 
+```python
+@mock.patch('project.fcns.foo', side_effect=['fakefoo', 'reallyfakefoo'])
+def test_multiple_returns(self, mock_foo):
+    """
+    Sometimes the function you are mocking may get called more than once
+    For example if your view has multiple requests.get or requests.post
+    If side_effect is an array then each call returns the next result
+    """
+    self.assertEqual(app(2, 3), 'fakefoo 3 bar')
+    self.assertEqual(app(2, 3), 'reallyfakefoo 3 bar')
+```
+
+#### Side effects - Exceptions
 ```python
 @mock.patch('project.fcns.foo', side_effect=Exception())
 def test_side_effect(self, mock_foo):

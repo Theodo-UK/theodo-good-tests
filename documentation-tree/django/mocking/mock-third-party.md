@@ -109,3 +109,11 @@ class SampleViewTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data, 'Bad Request')
 ```
+
+### Gotchas
+
+- If you need to mock multiple `requests.get`s or multiple `requests.post`s then one of the mocks will overwrite the other
+    - To overcome this you can specify multiple return values to the `requests.get` function using a `side_effect`
+    - If `side_effect` is an array then each call returns the next result
+    - So you could do `@mock.patch('requests.get', side_effect=[MockGoodResponse(), MockBadResponse()])`
+    - See an [example in General Mocking](./general-mocking.md#side-effects)
