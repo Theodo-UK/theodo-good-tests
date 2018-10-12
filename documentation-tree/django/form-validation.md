@@ -25,7 +25,7 @@ def check_graduation_date_after_birth_date(date_of_birth, date_of_graduation):
 
 `check_graduation_date_after_birth_date` is written as a function so that it can be called  in the form validation code as well as the test code.
 
-(Note: super().clean() applies the django form's built in validation, and we apply our own validaiton afterwards)
+(Note: `super().clean()` applies the django form's built in validation, and we apply our own validation afterwards)
 
 ## Test case
 
