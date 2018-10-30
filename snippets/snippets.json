@@ -220,6 +220,54 @@
 			""
 		]
 	},
+	"mockFetch": {
+		"description": "basic mock of fetch",
+		"prefix": ">re-jest-fetch",
+		"scope": "javascript",
+		"body": [
+			"const ${1:mockFetch} = jest",
+			"  .fn()",
+			"  .mockImplementation(() =>",
+			"    Promise.resolve({",
+			"      status: 200,",
+			"      json: () => ({${0}}),",
+			"    }),",
+			"  )"
+		]
+	},
+	"mockFetchMultiple": {
+		"description": "mock of fetch multiple times",
+		"prefix": ">re-jest-fetch-multiple",
+		"scope": "javascript",
+		"body": [
+			"const ${1:mockFetch} = jest",
+			"  .fn()",
+			"  .mockImplementationOnce(() =>",
+			"    Promise.resolve({",
+			"      status: 200,",
+			"      json: () => ({${0}}),",
+			"    }),",
+			"  )",
+			"  .mockImplementationOnce(() =>",
+			"    Promise.resolve({",
+			"      status: 200,",
+			"      json: () => ({}),",
+			"    }),",
+			"  )"
+		]
+	},
+	"mockFetchFailure": {
+		"description": "mock of a failed fetch",
+		"prefix": ">re-jest-fetch-fail",
+		"scope": "javascript",
+		"body": [
+			"const ${1:mockFetchFailure} = jest",
+			"  .fn()",
+			"  .mockImplementationOnce(() =>",
+			"    Promise.reject(),",
+			"  )"
+		]
+	},	
 	"consoleLog": {
 		"description": "Quick Console Logs",
 		"prefix": ">cl",

@@ -4,6 +4,11 @@ Mocking fetch is needed for some test cases, particularly in [saga tests](../sag
 
 It generally needs to be mocked as a Promise with a `json()` function that can be called
 
+Available [Snippets](../../../snippets/docs/contents.md): 
+- `>re-jest-fetch`
+- `>re-jest-fetch-fail`
+- `>re-jest-fetch-multiple`
+
 ## Basic Success Response
 
 ```js
