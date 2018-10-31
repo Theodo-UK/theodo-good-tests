@@ -1,5 +1,8 @@
 # Saga
 
+Available [Snippets](../../snippets/docs/contents.md): 
+- `>re-enzyme-saga`
+
 For any issues with mocking fetch see [here](./mocking/fetch.md)
 
 ## General advice

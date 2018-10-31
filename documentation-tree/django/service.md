@@ -1,5 +1,8 @@
 # Service
 
+Available [Snippets](../../snippets/docs/contents.md): 
+- `>dj-test`
+
 ## Example
 
 ### Code

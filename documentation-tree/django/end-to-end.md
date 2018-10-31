@@ -1,5 +1,10 @@
 # End to end
 
+Available [Snippets](../../snippets/docs/contents.md): 
+- `>dj-test-view-setup`
+- `>dj-test-get`
+- `>dj-test-post`
+
 ## GET Example
 
 ### Code
