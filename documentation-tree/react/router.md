@@ -1,5 +1,8 @@
 # Router
 
+Available [Snippets](../../snippets/docs/contents.md): 
+- `>re-enzyme-router`
+
 ### Code
 
 ```js

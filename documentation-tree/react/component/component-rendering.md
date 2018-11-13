@@ -1,5 +1,9 @@
 # Component Rendering
 
+Available [Snippets](../../../snippets/docs/contents.md): 
+- `>re-snap`
+- `>re-snap-styled`
+
 ## <a id="jsx-rendered"></a>JSX rendered
 ### Code
 ```js

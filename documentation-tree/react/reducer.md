@@ -1,5 +1,8 @@
 # Reducer
 
+Available [Snippets](../../snippets/docs/contents.md): 
+- `>re-enzyme-reducer`
+
 ### Code
 
 Suppose we have a redux module set up like so and we wish to test the reducer

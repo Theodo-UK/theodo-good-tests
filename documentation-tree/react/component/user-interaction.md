@@ -1,5 +1,8 @@
 # User Interaction
 
+Available [Snippets](../../../snippets/docs/contents.md): 
+- `>re-enzyme-click`
+
 ## <a id="user-interaction"></a>User interaction
 ### Code
 ```js

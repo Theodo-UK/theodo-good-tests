@@ -2,6 +2,10 @@
 
 Suppose we have a view that makes a request to `sample-url.com` which responds differently depending on the third party response
 
+Available [Snippets](../../../snippets/docs/contents.md): 
+- `>dj-mock-response`
+
+
 ### Code
 
 

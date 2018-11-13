@@ -17,6 +17,15 @@ See [Set Up](./setup.md) to learn how to use these
 | React Function Component Template| `>re-fcn-comp` | `component` |
 | React Pure Component Template| `>re-pure` | `component` |
 
+## React - Mocking
+
+| Description | Shortcut | Arguments |
+|--- | --- | --- |
+| Mock Fetch | `>re-jest-fetch` | `mockFetchName` |
+| Mock Fetch Failure | `>re-jest-fetch-fail` | `mockFetchName` |
+| Mock Fetch Multiple | `>re-jest-fetch-multiple` | `mockFetchName` |
+
+
 ## Django
 
 | Description | Shortcut | Arguments |

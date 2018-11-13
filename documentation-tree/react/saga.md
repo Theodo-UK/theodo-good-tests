@@ -1,5 +1,10 @@
 # Saga
 
+Available [Snippets](../../snippets/docs/contents.md): 
+- `>re-enzyme-saga`
+
+For any issues with mocking fetch see [here](./mocking/fetch.md)
+
 ## General advice
 
 ~~If there is logic in your saga, this logic should be isolated in a pure function that is tested. Do not test the saga itself.~~
