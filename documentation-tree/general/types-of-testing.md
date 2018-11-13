@@ -2,7 +2,7 @@
 
 ### Static Tests
 
-- Tests you code is syntactically correct and takes/returns the right types (e.g. flow/eslint)
+- Tests your code is syntactically correct and takes/returns the right types (e.g. flow/eslint)
 - 👍 Gives high confidence of no stupid bugs
 - 🚫 Doesn't prevent logic errors
 
@@ -11,7 +11,7 @@
 - Tests that test small "units" of the code in isolation
 - 👍 Fast, Reliable and Isolating
 - 🚫 Can lead to thousands of tests that require maintaining
-- 🚫 Don't guarantee that working parts will work together
+- 🚫 Doesn't guarantee that working parts will work together
 
 ### Integration Tests
 
