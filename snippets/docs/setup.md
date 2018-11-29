@@ -42,6 +42,7 @@ If the above example doesn't work:
 ```
   "emmet.showSuggestionsAsSnippets": true,
 ```
+- Different VSCode setups require different troubleshoot tweaks. If you have an issue after following these steps please open an Issue describing what you've tried or even better a PR if you find a new step or overall fix
 
 ## Personalise
 
