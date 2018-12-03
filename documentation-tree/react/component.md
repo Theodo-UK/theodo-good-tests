@@ -1,5 +1,7 @@
 # Component
 
+Link to Elias training on Jest [here](https://slides.com/eliastounzal-1/how-to-test-all-of-your-frontend-features-in-less-than-15-minutes-2)
+
 - [General advice](#general-advice)
 - [Passes props to children](./component/passes-props-to-children.md#passes-props-to-children)
 - [Component rendering](./component/component-rendering.md)
