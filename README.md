@@ -2,7 +2,7 @@
 
 ## Quick Links
 
-- [Testing Examples](#examples) - examples of code and relevant test
+- [Testing Examples](#examples) - examples of code and relevant tests
   - [Django](documentation-tree/django.md)
   - [React](documentation-tree/react.md)
 - [Snippets](#snippets) - templates for common tests
