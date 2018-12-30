@@ -372,7 +372,53 @@
 			"    status_code = ${2:status_code}",
 			"    $0"
 		]
-	},	
+	},
+	"flaskApp": {
+        "description": "Flask Basic App Setup",
+        "prefix": ">fl-app",
+        "scope": "python",
+        "body": [
+            "from flask import Flask, request, Response",
+            "",
+            "app = Flask(__name__)",
+            "",
+            "",
+            "@app.route('/${1:url}', methods=['POST'])",
+            "def post():",
+            "    $0",
+            "",
+            "    return Response()"
+        ]
+    },    
+    "flaskServerless": {
+        "description": "Flask Serverless setup",
+        "prefix": ">fl-serverless",
+        "body": [
+            "service: ${1:service}",
+            "",
+            "plugins:",
+            "  - serverless-python-requirements",
+            "  - serverless-wsgi",
+            "",
+            "custom:",
+            "  wsgi:",
+            "    app: app.app",
+            "    packRequirements: false",
+            "    pythonBin: python",
+            "",
+            "provider:",
+            "  name: aws",
+            "  profile: ${2:profile}",
+            "  runtime: python3.6",
+            "  region: eu-west-1",
+            "",
+            "functions:",
+            "  app:",
+            "    handler: wsgi.handler",
+            "    events:",
+            "      - http: ANY /"
+        ]
+    },
 	"pdb": {
 		"description": "Pdb Debug",
 		"prefix": ">pdb",

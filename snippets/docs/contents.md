@@ -36,6 +36,13 @@ See [Set Up](./setup.md) to learn how to use these
 | POST Request Test (after view setup) | `>dj-test-post` | `url`, `req_body`, `resp_data` |
 | Mock Response Class | `>dj-mock-response` | `response_desc`, `status_code` |
 
+## Flask
+
+| Description | Shortcut | Arguments |
+|--- | --- | --- |
+| Basic Flask app setup | `>fl-app` | `url` |
+| Flask serverless setup | `>fl-serverless` | `service` |
+
 ## Javascript
 
 | Description | Shortcut | Arguments |
