@@ -9,6 +9,7 @@ output_file = ''
 files = []
 combine_json = {}
 prefixes = []
+no_errors = 0
 
 # Default values
 flow = True
@@ -19,18 +20,23 @@ def check_settings(keys):
     # Checks required settings exist
     for r in required_settings:
         if r not in keys:
-            print(r, 'not provided in settings.json. Please add.')
+            print('🚨', r, 'not provided in settings.json. Please add.🚨')
             exit()            
 
 def apply_settings():
     # Applies all settings
     try:
         f =  open(settings_file)
+        data = json.load(f)
     except FileNotFoundError:
-        print('No settings file found')
-        print('Please make a settings.json file by copying settings.json.dist and editing where required')
+        print('🚨  No settings file found 🚨')
+        print('\tPlease make a settings.json file by copying settings.json.dist and editing where required')
         exit()
-    data = json.load(f)
+    except json.decoder.JSONDecodeError as error:
+        print('🚨  JSON error in', settings_file, '🚨')
+        print('\t', error)
+        exit()
+
     keys = data.keys()
     check_settings(keys)
 
@@ -53,19 +59,30 @@ def check_flow():
 
 
 def add_snippets_from_file(file_name):
-    # Adds a snippet if it or its prefix don't already exist
-    with open(file_name) as f:
-        data = json.load(f)
-        for d in data:
-            prefix = data.get(d).get('prefix')
-            if d not in combine_json.keys():
-                if prefix not in prefixes:
-                    prefixes.append(prefix)
-                    combine_json.update({d: data.get(d)})
+    # Adds a snippet if it or its prefix doesn't already exist
+    global no_errors
+    try:
+        with open(file_name) as f:
+            data = json.load(f)
+            for d in data:
+                prefix = data.get(d).get('prefix')
+                if d not in combine_json.keys():
+                    if prefix not in prefixes:
+                        prefixes.append(prefix)
+                        combine_json.update({d: data.get(d)})
+                    else:
+                        print('Prefix:', prefix, 'already exists. Version from the first file with this prefix kept')
                 else:
-                    print('Prefix:', prefix, 'already exists. Version from the first file with this prefix kept')
-            else:
-                print('Key:', d, 'already exists. Version from the first file with this key kept')
+                    print('Key:', d, 'already exists. Version from the first file with this key kept')
+        print('✅ ', file_name, 'snippets added ✅')
+    except FileNotFoundError:
+        print('🚨 ', file_name, 'does not exist 🚨')
+        print('\t Please ensure your settings.json file is up to date with settings.json.dist')
+        no_errors += 1
+    except json.decoder.JSONDecodeError as error:
+        print('🚨  JSON error in', file_name, '🚨')
+        print('\t', error)
+        no_errors += 1
 
 def reset_template():
     # resets the template if any changes have been made to it
@@ -75,10 +92,32 @@ def reset_template():
 # Program
 apply_settings()
 check_flow()
-combine_file = open(output_file, 'w')
+
+try:
+    combine_file = open(output_file, 'w')
+except FileNotFoundError:
+    print('🚨 ', output_file, 'does not exist 🚨')
+    print('\tIf you havn\'t modified the output_file setting(which you should\'t need to) please confirm that in your settings.json it has the same value as settings.json.dist')
+    exit()
+
+
 for file in files:
     add_snippets_from_file(file)
 
 json.dump(combine_json, combine_file, indent=2, sort_keys=True)
 reset_template()
+
+# Print success message
+if len(prefixes) > 0:
+    print('✅  snippets saved to', output_file, '✅')
+    print('ℹ️  The following snippets have been saved: ℹ️')
+    for prefix in prefixes:
+        print('\t', prefix)
+    print('ℹ️  Try them out now. If they don\'t work vist: https://github.com/Theodo-UK/theodo-good-tests/blob/master/snippets/docs/setup.md#troubleshoot ℹ️')
+    if no_errors > 0: 
+        print('⚠️  Completed with', no_errors, 'errors ⚠️')
+    else:
+        print('✅  Completed with 0 errors ✅')
+else:
+    print('No snippets added')
 
