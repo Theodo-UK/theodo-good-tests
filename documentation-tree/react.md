@@ -1,5 +1,9 @@
 # React Tests
 
+### Real runnable tests
+
+- [Real test examples you can run(WIP)](./js-examples.md)
+
 ### Test Types
 
 - [Component](./react/component.md)
