@@ -15,5 +15,5 @@
 
 ### Mocking
 
-- [General Mocking](./react/mocking/general.md) (Needs work)
+- [General Mocking](./react/mocking/general.md)
 - [Mocking Fetch](./react/mocking/fetch.md)

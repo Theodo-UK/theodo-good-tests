@@ -4,9 +4,9 @@ import { bar, foobar } from '../src/functions';
 
 /*
   Sometimes you need to reset a mock to ensure previous tests don't interfere with your results
-  Calling mock.mockClear will delete any previous calls of a mock object
+  Calling myMock.mockClear() will delete any previous calls of a mock object
     - i.e. the number of calls and expect.toHaveBeenCalledWith will be reset
-  Calling mock.mockReset does the same as mockClear but also clears any mocked implementations/return values
+  Calling myMock.mockReset() does the same as mockClear but also clears any mocked implementations/return values
     - i.e. it resets back to the default () => undefined
 */
 

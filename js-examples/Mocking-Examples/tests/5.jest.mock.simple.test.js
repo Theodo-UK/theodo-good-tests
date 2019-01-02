@@ -6,7 +6,7 @@ import { foo } from '../src/functions';
   jest.mock is different to jest.fn
   It takes a module as an argument
   Any function in that module will then automatically be set as a jest.fn() mock object
-    - Therefore if you mock functions.js, any call of one of those functions will return undefined by default
+    - Therefore if you mock functions.js, any call to one of those functions will return undefined by default
   If you want to check if the mocked function has been called etc you can simply import it from the functions.js file
     - ⚠️ Since functions.js has been mocked, when you import from it, you are actually importing the mock objects
 */

@@ -7,7 +7,7 @@ import main from '../src/main';
   If we were to try these on non mocked functions it wouldn't work
   
   However if you wish to check a function was called without mocking its behaviour you can use jest.spyOn
-  It creates a mock object like jest.fn but sets the default implementation as the real function
+  It creates a mock object like jest.fn but instead sets the default implementation as the real implementation
   
   Note: You can use mockImplementation etc to overwrite the real function like normal mock objects
 

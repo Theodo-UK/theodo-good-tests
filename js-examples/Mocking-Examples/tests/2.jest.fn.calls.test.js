@@ -8,12 +8,12 @@ import { foo, foobar } from '../src/functions';
       - i.e. it is the same as passing () => undefined in place of the real function
 
   However you can use "expect" to expect the function toHaveBeenCalled, toHaveBeenCalledWith etc
-    - expect(mock.toHaveBeenCalled)
+    - expect(mock).toHaveBeenCalled())
 
   The mock object also has a mock attribute which stores all the calls and results of the mock
     - myMock.mock.calls stores the arguments of each call 
       -> myMock.mock.calls[1][2] is the 3rd argument of the 2nd call
-    - myMock.mock.results stores the value and whether the mock threw an error for each call
+    - myMock.mock.results stores the value and whether the mock threw an exception for each call
       -> myMock.mock.results[1].value is the returned value of then 2nd call
 */
 
