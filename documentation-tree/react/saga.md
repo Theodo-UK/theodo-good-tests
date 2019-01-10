@@ -9,6 +9,30 @@ For any issues with mocking fetch see [here](./mocking/fetch.md)
 
 ~~If there is logic in your saga, this logic should be isolated in a pure function that is tested. Do not test the saga itself.~~
 
+## redux-saga-test-plan vs redux-saga-tester
+
+2 libraries have been tried to test sagas
+
+Both are shown here but the recommended library is `redux-saga-test-plan` due to:
+
+Pros of both
+- Don’t need to call .next on everything
+- Can easily test what is in the store
+- Can test whole flow of a dispatched action
+
+Pros of `redux-saga-test-plan`
+- Can check everything (puts, calls, takes, etc) if needed, not required to
+- Can test what a non mocked function is called with
+- Don’t have to explicitly mock everything with jest.mock, can specify return values in .provide
+- Can copy-paste the call lines straight from the actual saga
+- Can drop in new calls, puts anywhere without worrying about order
+- Don’t need async, await
+- Better readability
+
+Pros of `redux-saga-tester`
+- Can test exact order *if you want to*
+- Can test just what you want in the store (rather than whole state)
+
 ## Example
 
 ### Action Creators 
@@ -43,10 +67,10 @@ export function* fetchDataSaga(): Saga<void> {
     const resp = yield call(fetch, '/api/endpoint');
     const result = yield resp.json();
     yield put(fetchDataSuccess(result.data));
-    yield put(push('/data-page'))
+    yield put(push('/data-page'));
   } 
   catch error {
-    yield put(fetchDataFailure(error.body))
+    yield put(fetchDataFailure(error.body));
   }
 }
 
@@ -55,13 +79,66 @@ export default function* dataSaga(): Saga<void> {
 }
 ```
 
-### Test
+
+### Test redux-saga-test-plan
+
+```js
+import { combineReducers } from 'redux';
+import { push } from 'react-router-redux';
+import { call } from 'redux-saga/effects';
+import { expectSaga } from 'redux-saga-test-plan';
+
+import mySaga from '@redux/module/sagas';
+import { fetchData, fetchDataSuccess } from '@redux/modules/data/actions';
+import myReducer from '@redux/module/reducer';
+
+describe('fetchDataSaga test', () => {
+  const initialState = {
+    myReducer: { data: [] },
+  };
+  it('should retrieve data from the server and send a SUCCESS action', () => {
+    const finalState = {
+      ...initialState,
+      myReducer: {
+        ...initialState.myReducer,
+        data: ['wow some api'],
+      },
+    };
+
+    expectSaga(mySaga)
+      // Setup mocks
+      .provide([
+        [
+          call(fetch, '/api/endpoint', {
+            json: () => ({
+              result: 'wow some api',
+            }),
+          }),
+        ],
+      ])
+      // Setup reducer with initial state
+      .withReducer(combineReducers({ myReducer }), initialState)
+      // Dispatch initial action
+      .dispatch(fetchData())
+      // Check that expected stuff has happened (order doesn't matter)
+      .put(
+        fetchDataSuccess([{ result: 'wow some api' }])
+          .put(push('/data-page'))
+          // Check final state
+          .hasFinalState(finalState)
+          .silentRun(),
+      );
+  });
+});
+```
+
+### Test redux-saga-tester
 
 ```js
 import SagaTester from 'redux-saga-tester';
+import { push } from 'react-router-redux';
 
 import mySaga from '@redux/module/sagas';
-import * as actionTypes from '@redux/modules/data/actionTypes';
 import { fetchData, fetchDataSuccess } from '@redux/modules/data/actions';
 import myReducer from '@redux/module/reducer';
 
@@ -70,11 +147,11 @@ describe('fetchDataSaga test', () => {
 
   beforeEach(() => {
     const initialState = {
-      data: []
+      data: [],
     };
 
     sagaTester = new SagaTester({
-      initialState: { data: [] },
+      initialState,
       reducers: { myReducer },
     });
     // This attaches the saga to the store
@@ -83,10 +160,12 @@ describe('fetchDataSaga test', () => {
 
   it('should retrieve data from the server and send a SUCCESS action', async () => {
     // Here we mock the api call by mocking fetch
-    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-      status: 200,
-      json: () => Promise.resolve({ data: ['wow some api'] }),
-    }));
+    window.fetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        status: 200,
+        json: () => Promise.resolve({ data: [{ result: 'wow some api' }] }),
+      }),
+    );
 
     // Start the integration test by dispatching the first action
     sagaTester.dispatch(fetchData());
@@ -95,8 +174,8 @@ describe('fetchDataSaga test', () => {
     const calledActions = sagaTester.getCalledActions();
 
     expect(calledActions[0]).toEqual(fetchData);
-    expect(calledActions[1]).toEqual(fetchDataSuccess([{ model: 'test', make: 'testy' }]));
-    expect(calledActions[2]).toEqual(push('/data-page'))
+    expect(calledActions[1]).toEqual(fetchDataSuccess([{ result: 'wow some api' }]));
+    expect(calledActions[2]).toEqual(push('/data-page'));
   });
 });
 
