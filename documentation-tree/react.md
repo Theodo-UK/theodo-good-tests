@@ -2,7 +2,7 @@
 
 ### Real runnable tests
 
-- [Real test examples you can run(WIP)](./js-examples.md)
+- [Real test examples you can run(seperate repo)](https://github.com/Theodo-UK/theodo-good-tests-runnable-examples/#js-examples)
 
 ### Test Types
 

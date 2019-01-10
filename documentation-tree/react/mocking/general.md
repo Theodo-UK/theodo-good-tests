@@ -1,6 +1,6 @@
 # Mocking with Jest
 
-- See [real mock test examples you can run](../../js-examples.md#mocking-examples) within this repo
+- See [real mock test examples you can run](https://github.com/Theodo-UK/theodo-good-tests-runnable-examples#mocking-examples)
 - They will go through the info in this file with real examples
 
 ## Contents
