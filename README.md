@@ -8,8 +8,6 @@
 - [Snippets](#snippets) - templates for common tests
 - [Sources](#sources)
 
-
-
 # Why do we write tests?
 
 - To catch bugs locally and prevent them reaching production
@@ -19,9 +17,7 @@
   - A good test therefore doesn't just inform of a bug but shows where to fix it
 - To document the use cases of a function
 - To improve the quality of our code
-- To implement complex functions by enforcing business logic with tests 
-
-
+- To implement complex functions by enforcing business logic with tests
 
 # What is a good test?
 
@@ -38,9 +34,6 @@ A good test suite is:
 - **Reliable**: is deterministic providing confidence in its results
 - **Isolating**: pinpoints the faulty code
 
-
-
-
 # When should we write tests?
 
 - Testing is a trade-off of time spent writing the test vs time spent fixing bugs a test could prevent
@@ -50,8 +43,6 @@ A good test suite is:
   - Code Review
   - Techinal Strategy
 
-
-
 # What type of tests do we write?
 
 - Ideally a project would have a linter and type checker enforced
@@ -59,9 +50,7 @@ A good test suite is:
   - As a starter Google proposes 70/20/10 ([Source](https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html))
 - The pros/cons of each are discussed [here](documentation-tree/general/types-of-testing.md)
 
-
-
-# <a id="examples"></a> How to write a good test? 
+# <a id="examples"></a> How to write a good test?
 
 Find the relevant sample in this repo and start from there.
 
@@ -71,7 +60,10 @@ Choose your framework:
 - [React](documentation-tree/react.md)
 - React Native (Not yet added - [help wanted](https://github.com/Theodo-UK/theodo-good-tests/issues/24))
 
+### Good practices
 
+- You should ensure any test you create/update can fail if the code is broken. This ensures the test actually runs and that it tests the right thing
+- When developing you should know how to run just your specific test to reduce feedback time while debugging your test
 
 # Snippets
 
@@ -82,8 +74,6 @@ Given this is a testing repo, these can be templates for different forms of test
 - [Setting Up](./snippets/docs/setup.md)
 - [Contents](./snippets/docs/contents.md)
 - [Create Your Own](./snippets/docs/create.md)
-
-
 
 # Sources
 
