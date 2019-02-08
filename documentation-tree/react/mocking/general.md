@@ -16,6 +16,7 @@
 - [Mocking Default Export](#mocking-default-export)
 - [jest.doMock](#jestdomock)
 - [Mocking Fetch](./fetch.md)
+- [Mocking Stripe](./stripe.md)
 - [Sources](#sources)
 
 
@@ -30,7 +31,7 @@
 
 ## Using Expect
 
-However, if you first define it as 
+However, if you first define it as
 
 ```js
 const myMock = jest.fn()
@@ -46,7 +47,7 @@ expect(myMock).toHaveBeenCalledWith(2, 'abc');
 ```
 
 The mock object also has a mock attribute which stores all the calls and results of the mock:
-- `myMock.mock.calls` stores the arguments of each call 
+- `myMock.mock.calls` stores the arguments of each call
 
     - `myMock.mock.calls[1][2]` is the 3rd argument of the 2nd call to the function
 
@@ -90,7 +91,7 @@ Sometimes you need to reset a mock to ensure previous tests don't interfere with
 The mock object that jest.fn creates is very useful for checking how/if functions are called
 
 If we were to try these on non mocked functions it wouldn't work
-  
+
 However, if you wish to check a function was called without mocking its behaviour you can use `jest.spyOn`
 
 ```js
