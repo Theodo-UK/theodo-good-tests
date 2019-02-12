@@ -42,7 +42,7 @@ A good test suite is:
 - 3 potential options (which are discussed [here](documentation-tree/general/when-to-test.md)) are:
   - Code Coverage
   - Code Review
-  - Techinal Strategy
+  - Technical Strategy
 
 # What type of tests do we write?
 
