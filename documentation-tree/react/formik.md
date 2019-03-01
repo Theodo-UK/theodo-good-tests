@@ -2,7 +2,7 @@
 
 ## General advice
 
-Make the From part of your page a Component (even if in the same file) that can be easily tested.
+Make the Form part of your page a Component (even if in the same file) that can be easily tested.
 This can be done using the `render` prop of the `Formik` component.
 
 ## <a id="jsx-rendered"></a>JSX rendered
@@ -71,8 +71,8 @@ import { Button } from "Button"
 const mockFormikValues = {
   email: "test@theodo.co.uk",
   firstName: "John",
-  language: { label: "French", value: 'fr' },
   lastName: "Tester",
+  language: { label: "French", value: 'fr' },
   company: { label: "BAM", value: 'BAM' },
   title: { label: "Mr", value: 'mr' },
 }
