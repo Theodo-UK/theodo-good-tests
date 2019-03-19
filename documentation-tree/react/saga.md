@@ -132,6 +132,40 @@ describe('fetchDataSaga test', () => {
 });
 ```
 
+To mock a request function that is not `fetch` and does not have any parameter, you can use `matchers` instead:
+```
+import * as matchers from "redux-saga-test-plan/matchers"
+
+...
+describe('fetchDataSaga test', () => {
+  it('...', () => {
+    ...
+    expectSaga(mySaga)
+      // Setup mocks
+      .provide([
+        [
+          matchers.call.fn(getDataFromBackend), dataFromBackendMockObject
+        ],
+      ])
+      // Setup reducer with initial state
+      .withReducer(combineReducers({ myReducer }), initialState)
+      // Dispatch initial action
+      .dispatch(fetchData())
+      // Check that expected stuff has happened (order doesn't matter)
+      .put(
+        fetchDataSuccess([{ result: 'wow some api' }])
+          .put(push('/data-page'))
+          // Check final state
+          .hasFinalState(finalState)
+          .silentRun(),
+      );
+  })
+})
+
+
+
+```
+
 ### Test redux-saga-tester
 
 ```js
