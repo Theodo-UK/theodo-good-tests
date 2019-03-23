@@ -1,5 +1,10 @@
 # Theodo Good Tests
 
+<div align="center">
+    <img width="200px" src="./theodo.png" align="center">
+    <h4>Sharing of testing philosophy and best practices with commonly used examples</h4>
+</div>
+
 ## Quick Links
 
 - [Testing Examples](#examples) - examples of code and relevant tests
