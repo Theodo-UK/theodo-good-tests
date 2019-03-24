@@ -4,6 +4,7 @@ This is an example with the less preferred `redux-saga-tester` library
 
 - See examples of the preferred `redux-saga-test-plan` [here](./saga.md)
 - See comparison vs `redux-saga-test-plan` [here](./saga-library-comparison.md)
+- For any issues with mocking fetch see [here](../mocking/fetch.md)
 
 ### Action Creators
 
@@ -18,7 +19,7 @@ export const fetchDataSuccess = (data: MyData) => ({
 });
 
 export const fetchDataFailure = (error: ErrorType) => ({
-  type: actionTypes.LOOKUP.SUCCESS,
+  type: actionTypes.LOOKUP.FAILURE,
   error,
 });
 ```
