@@ -1,43 +1,14 @@
 # Saga
 
-Available [Snippets](../../snippets/docs/contents.md): 
-- `>re-enzyme-saga`
-
 For any issues with mocking fetch see [here](./mocking/fetch.md)
 
-## General advice
-
-~~If there is logic in your saga, this logic should be isolated in a pure function that is tested. Do not test the saga itself.~~
-
-## redux-saga-test-plan vs redux-saga-tester
-
-2 libraries have been tried to test sagas
-
-Both are shown here but the recommended library is `redux-saga-test-plan` due to:
-
-Pros of both
-- Don’t need to call .next on everything
-- Can easily test what is in the store
-- Can test whole flow of a dispatched action
-
-Pros of `redux-saga-test-plan`
-- Can check everything (puts, calls, takes, etc) if needed, not required to
-- Can test what a non mocked function is called with
-- Don’t have to explicitly mock everything with jest.mock, can specify return values in .provide
-- Can copy-paste the call lines straight from the actual saga
-- Can drop in new calls, puts anywhere without worrying about order
-- Don’t need async, await
-- Better readability
-
-Pros of `redux-saga-tester`
-- Can test exact order *if you want to*
-- Can test just what you want in the store (rather than whole state)
+See [analysis](./saga-library-comparison.md) of different saga testing libraries
 
 ## Example
 
-### Action Creators 
+### Action Creators
 
-```js 
+```js
 export const fetchData = () => ({
   type: actionTypes.LOOKUP.FETCH,
 });
@@ -68,7 +39,7 @@ export function* fetchDataSaga(): Saga<void> {
     const result = yield resp.json();
     yield put(fetchDataSuccess(result.data));
     yield put(push('/data-page'));
-  } 
+  }
   catch error {
     yield put(fetchDataFailure(error.body));
   }
@@ -78,7 +49,6 @@ export default function* dataSaga(): Saga<void> {
   yield takeEvery(actionTypes.LOOKUP.FETCH, fetchDataSaga);
 }
 ```
-
 
 ### Test redux-saga-test-plan
 
@@ -133,6 +103,7 @@ describe('fetchDataSaga test', () => {
 ```
 
 To mock a request function that is not `fetch` and does not have any parameter, you can use `matchers` instead:
+
 ```
 import * as matchers from "redux-saga-test-plan/matchers"
 
@@ -163,54 +134,5 @@ describe('fetchDataSaga test', () => {
 })
 
 
-
-```
-
-### Test redux-saga-tester
-
-```js
-import SagaTester from 'redux-saga-tester';
-import { push } from 'react-router-redux';
-
-import mySaga from '@redux/module/sagas';
-import { fetchData, fetchDataSuccess } from '@redux/modules/data/actions';
-import myReducer from '@redux/module/reducer';
-
-describe('fetchDataSaga test', () => {
-  let sagaTester;
-
-  beforeEach(() => {
-    const initialState = {
-      data: [],
-    };
-
-    sagaTester = new SagaTester({
-      initialState,
-      reducers: { myReducer },
-    });
-    // This attaches the saga to the store
-    sagaTester.start(mySaga);
-  });
-
-  it('should retrieve data from the server and send a SUCCESS action', async () => {
-    // Here we mock the api call by mocking fetch
-    window.fetch = jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        status: 200,
-        json: () => Promise.resolve({ data: [{ result: 'wow some api' }] }),
-      }),
-    );
-
-    // Start the integration test by dispatching the first action
-    sagaTester.dispatch(fetchData());
-
-    // Check that the actions that have been emitted by the saga are what we expect
-    const calledActions = sagaTester.getCalledActions();
-
-    expect(calledActions[0]).toEqual(fetchData);
-    expect(calledActions[1]).toEqual(fetchDataSuccess([{ result: 'wow some api' }]));
-    expect(calledActions[2]).toEqual(push('/data-page'));
-  });
-});
 
 ```
