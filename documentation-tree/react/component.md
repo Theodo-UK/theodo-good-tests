@@ -21,19 +21,11 @@ Link to Elias training on Jest [here](https://slides.com/eliastounzal-1/how-to-t
   - [Component connected to the store with redux selectors](./component/component-wrapping.md#map-state-to-props)
 
 ## <a id="general-advice"></a>General advice
-*Always* use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test).
 
-*Only exceptions*: if you have a render prop or a function-as-child-component (eg using react-virtualized) or if you need to test a styled component.
+Training on [How to test your frontend features in less than 15 minutes?](https://slides.com/eliastounzal-1/how-to-test-all-of-your-frontend-features-in-less-than-15-minutes-2) - Elias Tounzal
 
-There is *zero* valid use case for `react-test-renderer` directly: Enzyme is higher level.
+_Always_ use enzyme's `shallow` to test unconnected ("dumb") components. If you're using `mount`, you're testing more than just this component (and it becomes way more complex to test).
 
+_Only exceptions_: if you have a render prop or a function-as-child-component (eg using react-virtualized) or if you need to test a styled component.
 
-
-
-
-
-
-
-
-
-
+There is _zero_ valid use case for `react-test-renderer` directly: Enzyme is higher level.
