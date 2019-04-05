@@ -13,6 +13,7 @@
 
 - #### 🎭 [React](documentation-tree/general/react.md)
 - #### 🤖 [Django](documentation-tree/general/django.md)
+- #### ▶️ [Cypress (WIP)](documentation-tree/general/cypress.md)
 
 ### ✂ [Testing Snippets](snippets/docs/snippets.md)
 
