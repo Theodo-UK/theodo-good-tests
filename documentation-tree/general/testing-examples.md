@@ -6,4 +6,6 @@ Choose your framework:
 
 - 🎭 [React](./react.md)
 - 🤖 [Django](./django.md)
+- ▶️ [Cypress](./cypress.md)
+
 - React Native (Not yet added - [help wanted](https://github.com/Theodo-UK/theodo-good-tests/issues/24))

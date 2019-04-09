@@ -1,5 +1,6 @@
 # Cypress Tests [Work in progress]
 
-### Mocking
+## Best Practices
 
-- [General Mocking](../cypress/mocking/general.md)
+- [Selectors](../cypress/best-practices.md#selectors)
+- [Fixtures](../cypress/best-practices.md#fixtures)
