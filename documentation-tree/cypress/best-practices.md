@@ -23,8 +23,8 @@
 | `cy.get('button').click()`           | Never       | Worst - too generic, no context.                                |
 | `cy.get('.btn.btn-large').click()`   | Never       | Bad. Coupled to styling. Highly subject to change.              |
 | `cy.get('#main').click()`            | Sparingly   | Better. But still coupled to styling or JS event listeners.     |
-| `cy.get('[data-cy=submit]').click()` | Always      | Better, will be unlikely to break with style or wording change. |
-| `cy.contains('Submit').click()`      | Depends     | Best as user focused.                                           |
+| `cy.get('[data-cy=submit]').click()` | Depends      | Better, will be unlikely to break with style or wording change. |
+| `cy.contains('Submit').click()`      | Always     | Best as user focused.                                           |
 
 ## <a id="fixtures"></a>Fixtures
 
