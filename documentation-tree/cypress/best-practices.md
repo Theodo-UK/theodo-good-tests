@@ -128,11 +128,12 @@ Then(`I see {string} in the header`, header => {
     -  The Feature name includes the full `GIVEN THEN WHEN`. This is to make the test reports readable and in domain terms.
 
 ```
-Feature: GIVEN I'm on the Homepage THEN I see "Welcome to the website" in the title.
+Feature: GIVEN I'm on the Product page, WHEN I click "Add to Basket" button, THEN I see the "basket count" field increase
 
   Scenario: #81 Homepage title
-    Given I'm on the Homepage
-    Then I see "Welcome to the website" in the header
+    Given I'm on the "Product Page"
+    When I click the "Add to Basket" button
+    Then I see the "basket count" field increase
 ``` 
 
 ## Fixtures in BDD
