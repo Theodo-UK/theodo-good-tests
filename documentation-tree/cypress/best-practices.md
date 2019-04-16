@@ -91,7 +91,11 @@ Alternatively, a paid feature of cypress is the Cypress Dashboard which is very 
 ## <a id="parallelization"></a>Parallelization
 
 
-If your test runs are stating to slow your CI consider taking a payment plan for cypress as this will make Parallelization easy: https://docs.cypress.io/guides/guides/parallelization.html#Overview
+If your test runs are starting to slow your CI consider using the easy Parallelization feature: https://docs.cypress.io/guides/guides/parallelization.html#Overview
+
+The speedup can more than half your testing time depending on the number of machines used and the length and time distribution between your tests.
+
+Previously this was a paid feature, but has moved into the free tier, though if you need private recordings checkout their payment plans.
 
 ## <a id="bdd"></a>BDD (Behaviour Driven Development)
 
