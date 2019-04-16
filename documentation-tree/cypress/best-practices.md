@@ -80,3 +80,93 @@ cy.wait('@getSearch')
   .its('url')
   .should('include', '/search?query=Good');
 ```
+
+
+## <a id="reports"></a>Reports
+
+As cypress uses Mocha, [mochawesome](https://github.com/adamgruber/mochawesome) can be used to build an easy to read HTML and CSS report.
+
+Alternatively, a paid feature of cypress is the Cypress Dashboard which is very useful when the test running is distributed across several machines. 
+
+## <a id="parallelization"></a>Parallelization
+
+
+If your test runs are starting to slow your CI consider using the easy Parallelization feature: https://docs.cypress.io/guides/guides/parallelization.html#Overview
+
+The speedup can more than half your testing time depending on the number of machines used and the length and time distribution between your tests.
+
+Previously this was a paid feature, but has moved into the free tier, though if you need private recordings checkout their payment plans.
+
+## <a id="bdd"></a>BDD (Behaviour Driven Development)
+
+
+### Cucumber 
+
+`Behaviour driven development` (BDD), often referred to as the "Given, When, Then" approach, has been shown to be effective on some projects.
+Cypress allows a fast feedback loop that allows the granularity of scenarios to be very fine.
+
+-   A good introduction to BDD can be found in [this article](https://dannorth.net/whats-in-a-story/) by Dan North.
+-  [Cucumber](https://cucumber.io/), a DSL (Domain Specific Language), can be used to write our scenarios.
+
+
+We have experimented with this approach on a ticket by ticket basis, where the size of a ticket is < 1 dev day, but this approach although effective at preventing bugs does not scale well in terms of scenario duplication or test run time on CI. Interestingly the instance of False Positives, tests failing when nothing is broken was still low even with this high coverage.
+
+Our current experiment now, within the teams using Cypress-BDD, is to highlight feature chains at a sprint level at the sprint planning and write scenarios for these with the business. The Sprint Goal is the main candidate for this, but other feature chains require coverage too.
+
+### Cypress Cucumber Preprocessor
+
+Cypress can run the scenarios through the [Cucumber Cypress plugin](https://github.com/TheBrainFamily/cypress-cucumber-preprocessor).
+
+```js
+import { Then } from "cypress-cucumber-preprocessor/steps";
+
+Then(`I see {string} in the header`, header => {
+  cy.get("h1").should("include", header);
+});
+```
+
+### Writing Scenarios
+
+-   Add a new file in `cypress/integration` with the extension `.feature`
+    -  As a convention add the ticket number from Trello/JIRA to the start of the scenario, e.g. `Scenario: #34 - Adding items to basket` can help with traceability of features.
+    -  The Feature name includes the full `GIVEN THEN WHEN`. This is to make the test reports readable and in domain terms.
+
+```
+Feature: Product Basket Addition
+
+  Scenario: #81 GIVEN I'm on the Product page, WHEN I click "Add to Basket" button, THEN I see the "basket count" field increase
+    Given I'm on the "Product Page"
+    When I click the "Add to Basket" button
+    Then I see the "basket count" field increase
+``` 
+
+### Fixtures in BDD
+
+The best practice is to apply fixtures on a feature by feature basis. It's not best practice to apply them all globally as it reduces readability of your test runs and can make debugging harder as some fixtures will need to override others.
+
+Applying them as part of the scenario, or background, makes the tests slightly less readable to the business, but increases clarity for the development team as a whole.
+
+```
+  Background: I am on /user/list
+      Given I have an API with users
+      And I am on "/user/list"
+      And I wait for "getUsers"
+```
+
+The corresponding step definitions can be centralised under a common api.js file with step defs such as:
+
+```js
+Given("I have an API with users", () => {
+  cy.server()
+  cy.fixture("users.json").as("users")
+  cy.route("**/user/list", "@users").as("getUsers")
+})
+```
+
+Waiting for fixtures is extremely important as it ensures assertions on your API calls and reduces test Flakyness, [see the point above](#fixtures:xhr). A generic step definition for waiting on aliases makes this quick to apply.
+
+```
+Given("I wait for {string}", alias => {
+  cy.wait(`@${alias}`)
+})
+```
