@@ -128,9 +128,9 @@ Then(`I see {string} in the header`, header => {
     -  The Feature name includes the full `GIVEN THEN WHEN`. This is to make the test reports readable and in domain terms.
 
 ```
-Feature: GIVEN I'm on the Product page, WHEN I click "Add to Basket" button, THEN I see the "basket count" field increase
+Feature: Product Basket Addition
 
-  Scenario: #81 Homepage title
+  Scenario: #81 GIVEN I'm on the Product page, WHEN I click "Add to Basket" button, THEN I see the "basket count" field increase
     Given I'm on the "Product Page"
     When I click the "Add to Basket" button
     Then I see the "basket count" field increase
