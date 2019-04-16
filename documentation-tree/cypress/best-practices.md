@@ -82,21 +82,21 @@ cy.wait('@getSearch')
 ```
 
 
-# <a id="reports"></a>Reports
+## <a id="reports"></a>Reports
 
 As cypress uses Mocha, [mochawesome](https://github.com/adamgruber/mochawesome) can be used to build an easy to read HTML and CSS report.
 
 Alternatively, a paid feature of cypress is the Cypress Dashboard which is very useful when the test running is distributed across several machines. 
 
-# <a id="parallelization"></a>Parallelization
+## <a id="parallelization"></a>Parallelization
 
 
 If your test runs are stating to slow your CI consider taking a payment plan for cypress as this will make Parallelization easy: https://docs.cypress.io/guides/guides/parallelization.html#Overview
 
-# <a id="bdd"></a>BDD (Behaviour Driven Development)
+## <a id="bdd"></a>BDD (Behaviour Driven Development)
 
 
-## Cucumber 
+### Cucumber 
 
 `Behaviour driven development` (BDD), often referred to as the "Given, When, Then" approach, has been shown to be effective on some projects.
 Cypress allows a fast feedback loop that allows the granularity of scenarios to be very fine.
@@ -109,7 +109,7 @@ We have experimented with this approach on a ticket by ticket basis, where the s
 
 Our current experiment now, within the teams using Cypress-BDD, is to highlight feature chains at a sprint level at the sprint planning and write scenarios for these with the business. The Sprint Goal is the main candidate for this, but other feature chains require coverage too.
 
-## Cypress Cucumber Preprocessor
+### Cypress Cucumber Preprocessor
 
 Cypress can run the scenarios through the [Cucumber Cypress plugin](https://github.com/TheBrainFamily/cypress-cucumber-preprocessor).
 
@@ -121,7 +121,7 @@ Then(`I see {string} in the header`, header => {
 });
 ```
 
-## Writing Scenarios
+### Writing Scenarios
 
 -   Add a new file in `cypress/integration` with the extension `.feature`
     -  As a convention add the ticket number from Trello/JIRA to the start of the scenario, e.g. `Scenario: #34 - Adding items to basket` can help with traceability of features.
@@ -136,7 +136,7 @@ Feature: GIVEN I'm on the Product page, WHEN I click "Add to Basket" button, THE
     Then I see the "basket count" field increase
 ``` 
 
-## Fixtures in BDD
+### Fixtures in BDD
 
 The best practice is to apply fixtures on a feature by feature basis. It's not best practice to apply them all globally as it reduces readability of your test runs and can make debugging harder as some fixtures will need to override others.
 
