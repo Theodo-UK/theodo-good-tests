@@ -48,7 +48,9 @@ Even when network requests are stubbed out using fixtures, there is still a dela
 
 ![fig](./networkDelay.png)
 
-You should explicitly wait on **all** network requersts that you stub, and taking [the point above](#fixtures:xhr) - **all** network requests should be stubbed.
+You should explicitly wait on **all** network requests that you stub, and taking [the point above](#fixtures:xhr) - **all** network requests should be stubbed.
+
+According to Cypress, network requests are not made when using [javascript fetch](https://github.com/cypress-io/cypress/issues/95), however when using [axios](https://github.com/axios/axios) the stubbing works all great :).
 
 ```js
 cy.server();
