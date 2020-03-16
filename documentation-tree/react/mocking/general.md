@@ -15,6 +15,7 @@
 - [requireActual](#requireactual)
 - [Mocking Default Export](#mocking-default-export)
 - [jest.doMock](#jestdomock)
+- [Mocking Global Variables](#mocking-global-variables)
 - [Mocking Fetch](./fetch.md)
 - [Mocking Stripe](./stripe.md)
 - [Sources](#sources)
@@ -174,7 +175,16 @@ All following tests will go back to using the real module again
 
 Similarly you can use a `jest.dontMock` to use the actual implementation for specific tests if it has already been mocked
 
+## Mocking Global Variables
+eg. mocking of cookies in document global variable
 
+
+```js
+Object.defineProperty(document, "cookie", {
+    value: "hello=letsmakecookies;",
+    configurable: true,
+});
+```
 
 ## Sources
 
