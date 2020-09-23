@@ -6,15 +6,15 @@ Make the Form part of your page a Component (even if in the same file) that can 
 This can be done using the `render` prop of the `Formik` component.
 
 ## <a id="jsx-rendered"></a>JSX rendered
+
 ### Code
+
 ```js
 const CreateUserSchema = Yup.object().shape({
   company: Yup.string().required("This field is Required"),
   firstName: Yup.string().required("This field is Required"),
-  email: Yup.string()
-    .email("Invalid email")
-    .required("This field is Required"),
-})
+  email: Yup.string().email("Invalid email").required("This field is Required"),
+});
 export const FormikForm = ({ values, errors, isSubmitting, createUser }) => (
   <>
     <Field title="First Name" type="text" name="firstName" id="firstName" />
@@ -43,27 +43,101 @@ export const FormikForm = ({ values, errors, isSubmitting, createUser }) => (
       Create
     </Button>
   </>
-)
+);
 export default class CreateUserPage extends React.PureComponent {
   render() {
     return (
       <>
-        <h1>
-          Create User
-        </h1>
+        <h1>Create User</h1>
         <div>
           <Formik
             validationSchema={CreateUserSchema}
-            render={fomikProps => <FormikForm createUser={this.props.createUser} {...fomikProps} />}
+            render={(fomikProps) => (
+              <FormikForm createUser={this.props.createUser} {...fomikProps} />
+            )}
           />
         </div>
       </>
-    )
+    );
   }
 }
 ```
 
-### Test
+### Test (react-testing-library)
+
+```js
+import '@testing-library/jest-dom/extend-expect';
+import { render, fireEvent } from 'testing/reactTestingLibraryIntl';
+
+const mockFormikValues = {
+  email: "test@theodo.co.uk",
+  firstName: "John",
+  lastName: "Tester",
+  language: { label: "French", value: 'fr' },
+  company: { label: "BAM", value: 'BAM' },
+  title: { label: "Mr", value: 'mr' },
+}
+
+const buttonText = "Create";
+
+describe("FormikForm", () => {
+  it("should have a disabled next button if errors present", () => {
+    const {getByText} = render(
+      <FormikForm
+        values={mockFormikValues}
+        isSubmitting={false}
+        errors={{ mockError: "some error" }}
+      />
+    );
+    expect(getByText(buttonText)).toBeDisabled();
+  })
+  it("should have a disabled next button if no values present", () => {
+    const {getByText} = render(
+      <FormikForm
+        values={{}}
+        isSubmitting={false}
+        errors={{}}
+      />
+    );
+    expect(getByText(buttonText)).toBeDisabled();
+  })
+  it("should have a disabled next button if submitting in progress", () => {
+    const {getByText} = render(
+      <FormikForm
+        values={mockFormikValues}
+        isSubmitting
+        errors={{}}
+      />
+    );
+    expect(getByText(buttonText)).toBeDisabled();
+  })
+  it("should have an enabled next button with all values complete and no errors", () => {
+    const {getByText} = render(
+      <FormikForm
+        values={mockFormikValues}
+        isSubmitting={false}
+        errors={{}}
+      />
+    );
+    expect(getByText(buttonText)).toBeEnabled();
+  })
+  it("should call createUser on create press", () => {
+    const createUser = jest.fn()
+    const {getByText} = render(
+      <FormikForm
+        createUser={createUser}
+        values={mockFormikValues}
+        isSubmitting={false}
+        errors={{}}
+      />
+    );
+    fireEvent.click(getByText(buttonText));
+    expect(createUser).toHaveBeenCalledTimes(1)
+  })
+```
+
+### Test (Enzyme)
+
 ```js
 import { shallow } from "enzyme"
 import { Button } from "Button"
@@ -141,4 +215,4 @@ describe("FormikForm", () => {
       .simulate("click")
     expect(createUser).toHaveBeenCalledTimes(1)
   })
-  ```
+```
