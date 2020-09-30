@@ -5,7 +5,7 @@
 - The example component is a simple styled button component with an icon from an external library (in this instance, the [ui-kitten](https://akveo.github.io/react-native-ui-kitten/) library).
 
 
-```
+```ts
 <!-- AddConsultButton.tsx -->
 
 import React, { FunctionComponent } from 'react';
@@ -42,7 +42,7 @@ export const AddConsultButton: FunctionComponent<Props> = ({ patientName, onButt
 - Use a snapshot test to ensure all the components are correctly rendered. Ensure to include providers for the icon library!
 
 
-```
+```ts
 <!-- AddConsultButton.test.tsx -->
 
 import React from 'react';
@@ -72,7 +72,7 @@ describe('[Component] AddConsultButton', () => {
 
 - An example for a simple form (text only inputs) using react-hook-form
 
-```
+```ts
 <!-- PatientDetailsComponent.tsx -->
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -169,7 +169,7 @@ export default PatientDetailsComponent;
 
 - We can also snapshot test this component, and mock the onSubmit function using jest.mock(). We use the `react-redux` Provider as well  as ApplicationProvider + IconRegistry from the [`ui-kitten`](https://akveo.github.io/react-native-ui-kitten/) library as above.
 
-```
+```ts
 <!-- PatientDetailsComponent.test.tsx -->
 import React from 'react';
 import { render } from 'react-native-testing-library';

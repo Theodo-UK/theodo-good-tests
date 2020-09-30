@@ -12,7 +12,7 @@
 - The above structure is wrapped by a StackNavigator, and ExistingPatientDetail, the highest level, takes in the 'navigation' prop. Therefore we test navigation at this level by mocking this navigation function and expecting it to be called with certain inputs.
 
 ## ExistingPatientDetail 
-```
+```ts
 <!-- ExistingPatientDetail.tsx -->
 import React, { FunctionComponent } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -54,7 +54,7 @@ export const ExistingPatientDetail: FunctionComponent<Props> = ({ navigation }) 
 ## ExistingPatientDetail Navigation Test
 
 
-```
+```ts
 import React from 'react';
 import { render, fireEvent, waitFor } from 'react-native-testing-library';
 import configureStore from 'redux-mock-store';
@@ -71,7 +71,7 @@ const mockStore = configureStore([]);
 
 
 describe('[Component] ExistingPatientDetail', () => {
-    
+
     const navigation = {
     navigate: jest.fn(),
   } as any; // eslint-disable-line @typescript-eslint/no-explicit-any
